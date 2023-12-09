@@ -29,9 +29,10 @@ module pong(
     input video_on,
     input [9:0] x,
     input [9:0] y,
-    output reg hit, p1_score, p2_score,
+    output reg [1:0] state, p1_score, p2_score,
     output reg [11:0] rgb
     );
+    
     
     // maximum x, y values in display area
     parameter X_MAX = 639;
@@ -163,14 +164,13 @@ module pong(
     // pixel within round ball
     assign ball_on = sq_ball_on & rom_bit;      // within square boundaries AND rom data bit == 1
     // new ball position
-    assign x_ball_next = (refresh_tick) ? x_ball_reg + x_delta_reg : x_ball_reg;
-    assign y_ball_next = (refresh_tick) ? y_ball_reg + y_delta_reg : y_ball_reg;
+    assign x_ball_next = (state) ? X_MAX/2 :
+                         (refresh_tick) ? x_ball_reg + x_delta_reg : x_ball_reg;
+    assign y_ball_next = (state) ? Y_MAX/2 :
+                         (refresh_tick) ? y_ball_reg + y_delta_reg : y_ball_reg;
     
     // change ball direction after collision
     always @* begin
-        hit = 1'b0;
-        p1_score = 1'b0;
-        p2_score = 1'b0;
         x_delta_next = x_delta_reg;
         y_delta_next = y_delta_reg;
         if(y_ball_t < 1)                                            // collide with top
@@ -183,7 +183,49 @@ module pong(
         else if((X_PAD2_L <= x_ball_r) && (x_ball_r <= X_PAD2_R) &&
                 (y_pad2_t <= y_ball_b) && (y_ball_t <= y_pad2_b))   // collide with paddle 2
             x_delta_next = BALL_VELOCITY_NEG;                       // move right
-    end                    
+    end
+     
+    wire [3:0] rand_out;
+    
+    lfsr4 Random(.clk(clk), .reset(reset), .rand_out(rand_out));
+    
+    always @* begin
+        if(state&&start)
+            begin
+                assign state = 0;
+                case (rand_out)
+                    4'b000: begin
+                            x_delta_next = BALL_VELOCITY_POS;
+                            y_delta_next = BALL_VELOCITY_POS;
+                            end
+                    4'b001: begin
+                            x_delta_next = BALL_VELOCITY_POS;
+                            y_delta_next = BALL_VELOCITY_NEG;
+                            end
+                    4'b010: begin
+                            x_delta_next = BALL_VELOCITY_POS;
+                            y_delta_next = BALL_VELOCITY_POS;
+                            end
+                    4'b000: begin
+                            x_delta_next = BALL_VELOCITY_POS;
+                            x_delta_next = BALL_VELOCITY_POS;
+                            end
+                endcase 
+            end
+    end               
+    
+    always @* begin
+        p1_score <= 1'b0;
+        p2_score <= 1'b0;
+        if(x_ball_r < 1) begin
+            state <= 1;
+            p2_score <= 1;
+            end
+        else if(x_ball_r > X_MAX) begin
+            state <= 1;
+            p1_score <= 1;
+            end
+    end     
     
     // rgb multiplexing circuit
     always @*
@@ -198,5 +240,6 @@ module pong(
                 rgb = ball_rgb;     // ball color
             else
                 rgb = bg_rgb;       // background
+                
                 
 endmodule
