@@ -22,12 +22,14 @@
 
 module pong(
     input clk,  
-    input reset,    
+    input reset,
+    input start,    
     input up,
     input down,
     input video_on,
     input [9:0] x,
     input [9:0] y,
+    output reg hit, p1_score, p2_score,
     output reg [11:0] rgb
     );
     
@@ -44,16 +46,26 @@ module pong(
     parameter X_WALL_L = 32;    
     parameter X_WALL_R = 39;    // 8 pixels wide
     
-    // PADDLE
+    // PADDLE P1
     // paddle horizontal boundaries
-    parameter X_PAD_L = 600;
-    parameter X_PAD_R = 603;    // 4 pixels wide
+    parameter X_PAD_L = 36;
+    parameter X_PAD_R = 42;    // 6 pixels wide
     // paddle vertical boundary signals
     wire [9:0] y_pad_t, y_pad_b;
-    parameter PAD_HEIGHT = 72;  // 72 pixels high
     // register to track top boundary and buffer
     reg [9:0] y_pad_reg, y_pad_next;
     // paddle moving velocity when a button is pressed
+    
+    // PADDLE P2
+    parameter X_PAD2_L = 597;
+    parameter X_PAD2_R = 603;    // 4 pixels wide
+    // paddle vertical boundary signals
+    wire [9:0] y_pad2_t, y_pad2_b;
+    // register to track top boundary and buffer
+    reg [9:0] y_pad2_reg, y_pad2_next;
+    // paddle moving velocity when a button is pressed
+    
+    parameter PAD_HEIGHT = 69;  // 72 pixels high
     parameter PAD_VELOCITY = 3;     // change to speed up or slow down paddle movement
     
     // BALL
@@ -74,9 +86,9 @@ module pong(
     parameter BALL_VELOCITY_POS = 2;
     parameter BALL_VELOCITY_NEG = -2;
     // round ball from square image
-    wire [2:0] rom_addr, rom_col;   // 3-bit rom address and rom column
-    reg [7:0] rom_data;             // data at current rom address
-    wire rom_bit;                   // signify when rom data is 1 or 0 for ball rgb control
+    wire [2:0] rom_addr, rom_col;    // 3-bit rom address and rom column
+    wire [7:0] rom_data;             // data at current rom address
+    wire rom_bit;                    // signify when rom data is 1 or 0 for ball rgb control
     
     // Register Control
     always @(posedge clk or posedge reset)
@@ -89,6 +101,7 @@ module pong(
         end
         else begin
             y_pad_reg <= y_pad_next;
+            y_pad2_reg <= y_pad2_next;
             x_ball_reg <= x_ball_next;
             y_ball_reg <= y_ball_next;
             x_delta_reg <= x_delta_next;
@@ -96,28 +109,19 @@ module pong(
         end
     
     // ball rom
-    always @*
-        case(rom_addr)
-            3'b000 :    rom_data = 8'b00111100; //   ****  
-            3'b001 :    rom_data = 8'b01111110; //  ******
-            3'b010 :    rom_data = 8'b11111111; // ********
-            3'b011 :    rom_data = 8'b11111111; // ********
-            3'b100 :    rom_data = 8'b11111111; // ********
-            3'b101 :    rom_data = 8'b11111111; // ********
-            3'b110 :    rom_data = 8'b01111110; //  ******
-            3'b111 :    rom_data = 8'b00111100; //   ****
-        endcase
+    ball Ball(.addr(rom_addr), .data(rom_data));
     
     // OBJECT STATUS SIGNALS
-    wire wall_on, pad_on, sq_ball_on, ball_on;
-    wire [11:0] wall_rgb, pad_rgb, ball_rgb, bg_rgb;
+    wire wall_on, pad_on, pad2_on, sq_ball_on, ball_on;
+    wire [11:0] wall_rgb, pad_rgb, pad2_rgb, ball_rgb, bg_rgb;
     
     // pixel within wall boundaries
     assign wall_on = ((X_WALL_L <= x) && (x <= X_WALL_R)) ? 1 : 0;
     
     // assign object colors
     assign wall_rgb = 12'hAAA;      // gray wall
-    assign pad_rgb = 12'hAAA;       // gray paddle
+    assign pad_rgb = 12'hD78;       // gray paddle
+    assign pad2_rgb = 12'h7BF;
     assign ball_rgb = 12'hFFF;      // white ball
     assign bg_rgb = 12'h111;       // close to black background
     
@@ -136,6 +140,13 @@ module pong(
             else if(down & (y_pad_b < (Y_MAX - PAD_VELOCITY)))
                 y_pad_next = y_pad_reg + PAD_VELOCITY;  // move down
     end
+    
+    // paddle2 
+    assign y_pad2_t = y_pad2_reg;                             // paddle top position
+    assign y_pad2_b = y_pad2_t + PAD_HEIGHT - 1;              // paddle bottom position
+    assign pad2_on = (X_PAD2_L <= x) && (x <= X_PAD2_R) &&     // pixel within paddle boundaries
+                    (y_pad2_t <= y) && (y <= y_pad2_b);
+    
     
     // rom data square boundaries
     assign x_ball_l = x_ball_reg;
@@ -157,17 +168,21 @@ module pong(
     
     // change ball direction after collision
     always @* begin
+        hit = 1'b0;
+        p1_score = 1'b0;
+        p2_score = 1'b0;
         x_delta_next = x_delta_reg;
         y_delta_next = y_delta_reg;
         if(y_ball_t < 1)                                            // collide with top
             y_delta_next = BALL_VELOCITY_POS;                       // move down
         else if(y_ball_b > Y_MAX)                                   // collide with bottom
             y_delta_next = BALL_VELOCITY_NEG;                       // move up
-        else if(x_ball_l <= X_WALL_R)                               // collide with wall
-            x_delta_next = BALL_VELOCITY_POS;                       // move right
         else if((X_PAD_L <= x_ball_r) && (x_ball_r <= X_PAD_R) &&
-                (y_pad_t <= y_ball_b) && (y_ball_t <= y_pad_b))     // collide with paddle
-            x_delta_next = BALL_VELOCITY_NEG;                       // move left
+                (y_pad_t <= y_ball_b) && (y_ball_t <= y_pad_b))     // collide with paddle 1
+            x_delta_next = BALL_VELOCITY_POS;                       // move left
+        else if((X_PAD2_L <= x_ball_r) && (x_ball_r <= X_PAD2_R) &&
+                (y_pad2_t <= y_ball_b) && (y_ball_t <= y_pad2_b))   // collide with paddle 2
+            x_delta_next = BALL_VELOCITY_NEG;                       // move right
     end                    
     
     // rgb multiplexing circuit
@@ -175,8 +190,8 @@ module pong(
         if(~video_on)
             rgb = 12'h000;      // no value, blank
         else
-            if(wall_on)
-                rgb = wall_rgb;     // wall color
+            if(pad2_on)
+                rgb = pad2_rgb;     // wall color
             else if(pad_on)
                 rgb = pad_rgb;      // paddle color
             else if(ball_on)

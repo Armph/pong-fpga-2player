@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Sat Dec  9 21:07:28 2023
+| Date             : Sun Dec 10 00:56:33 2023
 | Host             : DESKTOP-SM4QN4U running 64-bit major release  (build 9200)
 | Command          : report_power -file main_power_routed.rpt -pb main_power_summary_routed.pb -rpx main_power_routed.rpx
 | Design           : main
@@ -33,7 +33,7 @@ Table of Contents
 | Total On-Chip Power (W)  | 0.076        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.004        |
+| Dynamic (W)              | 0.005        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.6         |
@@ -53,12 +53,12 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |    <0.001 |        3 |       --- |             --- |
-| Slice Logic    |    <0.001 |      315 |       --- |             --- |
-|   LUT as Logic |    <0.001 |      137 |     20800 |            0.66 |
-|   CARRY4       |    <0.001 |       23 |      8150 |            0.28 |
+| Slice Logic    |    <0.001 |      359 |       --- |             --- |
+|   LUT as Logic |    <0.001 |      155 |     20800 |            0.75 |
+|   CARRY4       |    <0.001 |       31 |      8150 |            0.38 |
 |   Register     |    <0.001 |       91 |     41600 |            0.22 |
 |   Others       |     0.000 |        9 |       --- |             --- |
-| Signals        |    <0.001 |      181 |       --- |             --- |
+| Signals        |    <0.001 |      188 |       --- |             --- |
 | I/O            |     0.002 |       16 |       106 |           15.09 |
 | Static Power   |     0.072 |          |           |                 |
 | Total          |     0.076 |          |           |                 |
@@ -140,7 +140,7 @@ Table of Contents
 +---------+-----------+
 | Name    | Power (W) |
 +---------+-----------+
-| main    |     0.004 |
+| main    |     0.005 |
 |   vga_c |     0.001 |
 +---------+-----------+
 
