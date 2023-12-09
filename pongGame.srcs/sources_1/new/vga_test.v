@@ -25,7 +25,7 @@ module vga_test(
     wire [1:0] reset;
     
 	assign rgb = {vgaRed, vgaGreen, vgaBlue};
-	assign reset = btnC;
+	btn reset_btn(.clk(clk), .btn_in(btnC), .btn_out(reset));
 	
 	// Signal Declaration
 	reg [11:0] rgb_reg;    // register for Basys 3 12-bit RGB DAC 

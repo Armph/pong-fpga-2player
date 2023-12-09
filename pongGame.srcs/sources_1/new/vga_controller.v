@@ -55,11 +55,9 @@ module vga_controller(
     reg [9:0] h_count_reg, h_count_next;
     reg [9:0] v_count_reg, v_count_next;
     
-    // Output Buffers
     reg v_sync_reg, h_sync_reg;
     wire v_sync_next, h_sync_next;
     
-    // Register Control
     always @(posedge clk or posedge reset)
         if(reset) begin
             v_count_reg <= 0;
@@ -74,23 +72,21 @@ module vga_controller(
             h_sync_reg  <= h_sync_next;
         end
          
-    //Logic for horizontal counter
-    always @(posedge p_tick or posedge reset)      // pixel tick
+    always @(posedge p_tick or posedge reset)
         if(reset)
             h_count_next = 0;
         else
-            if(h_count_reg == HMAX)                 // end of horizontal scan
+            if(h_count_reg == HMAX)
                 h_count_next = 0;
             else
                 h_count_next = h_count_reg + 1;         
   
-    // Logic for vertical counter
     always @(posedge p_tick or posedge reset)
         if(reset)
             v_count_next = 0;
         else
-            if(h_count_reg == HMAX)                 // end of horizontal scan
-                if((v_count_reg == VMAX))           // end of vertical scan
+            if(h_count_reg == HMAX)
+                if((v_count_reg == VMAX))
                     v_count_next = 0;
                 else
                     v_count_next = v_count_reg + 1;
@@ -109,26 +105,5 @@ module vga_controller(
     assign vsync  = v_sync_reg;
     assign x      = h_count_reg;
     assign y      = v_count_reg;
-    
-    /*
-    
-    
-    wire v_enable;
-    wire h_count;
-    wire v_count;
-    
-    h_counter(
-        .clk(p_tick),
-        .HMAX(HMAX),
-        .v_enable(v_enable),
-        .h_count(h_count)
-    );
-    
-    v_counter(
-        .clk(p_tick),
-        .VMAX(VMAX),
-        .v_enable(v_enable),
-        .v_count(v_count)
-    );
-    */
+   
 endmodule
