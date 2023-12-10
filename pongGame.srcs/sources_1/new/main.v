@@ -28,10 +28,13 @@ module main(
 	output Vsync,
 	output [3:0] vgaRed,    
 	output [3:0] vgaBlue,
-	output [3:0] vgaGreen
+	output [3:0] vgaGreen,
+	output [6:0] seg,
+	output [3:0] an
     );
     
     wire [11:0] rgb;
+    wire an0, an1, an2, an3;
     wire [1:0] reset;
     wire [1:0] start;
     
@@ -46,6 +49,7 @@ module main(
 	wire p1_score, p2_score;
 	wire [11:0] rgb_next;
 	wire video_on;         // Same signal as in controller
+	wire [12:0] quad;
 
     vga_controller vga_c(.clk(clk), .reset(reset), .hsync(Hsync), .vsync(Vsync),
                          .video_on(video_on), .p_tick(tick), .x(x), .y(y));
@@ -54,6 +58,11 @@ module main(
            .down(reset),  .video_on(video_on), .x(x), .y(y), 
            .p1_score(p1_score), .p2_score(p2_score), .rgb(rgb_next));
            
+    pongScore ps(.p1_score(p1_score), .p2_score(p2_score), .rest(reset), .quad(quad));
+    
+    quad7seg q7s(.clk(clk), .quad(quad), .an0(an0), .an1(an1),
+                 .an2(an2), .an3(an3), .seg(seg));
+    
     always @(posedge clk)
         if(tick)
             rgb_reg <= rgb_next;
