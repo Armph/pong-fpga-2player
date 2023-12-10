@@ -29,10 +29,17 @@ module pong(
     input video_on,
     input [9:0] x,
     input [9:0] y,
-    output reg [1:0] state, p1_score, p2_score,
+    output reg p1_score, p2_score,
     output reg [11:0] rgb
     );
     
+    reg [1:0] state;
+    
+    initial begin
+        state <= 1'b0;
+        p1_score <= 1'b0;
+        p2_score <= 1'b0;
+    end
     
     // maximum x, y values in display area
     parameter X_MAX = 639;
@@ -42,33 +49,25 @@ module pong(
     wire refresh_tick;
     assign refresh_tick = ((y == 481) && (x == 0)) ? 1 : 0; // start of vsync(vertical retrace)
     
-    // WALL
-    // wall boundaries
-    parameter X_WALL_L = 32;    
-    parameter X_WALL_R = 39;    // 8 pixels wide
-    
-    // PADDLE P1
-    // paddle horizontal boundaries
-    parameter X_PAD_L = 36;
-    parameter X_PAD_R = 42;    // 6 pixels wide
-    // paddle vertical boundary signals
-    wire [9:0] y_pad_t, y_pad_b;
-    // register to track top boundary and buffer
-    reg [9:0] y_pad_reg, y_pad_next;
-    // paddle moving velocity when a button is pressed
-    
-    // PADDLE P2
-    parameter X_PAD2_L = 597;
-    parameter X_PAD2_R = 603;    // 4 pixels wide
-    // paddle vertical boundary signals
-    wire [9:0] y_pad2_t, y_pad2_b;
-    // register to track top boundary and buffer
-    reg [9:0] y_pad2_reg, y_pad2_next;
-    // paddle moving velocity when a button is pressed
     
     parameter PAD_HEIGHT = 69;  // 72 pixels high
     parameter PAD_VELOCITY = 3;     // change to speed up or slow down paddle movement
     
+    // PADDLE P1
+    parameter X_PAD_L = 36;
+    parameter X_PAD_R = 42;    // 6 pixels wide
+    wire [9:0] y_pad_t, y_pad_b;
+    reg [9:0] y_pad_reg = Y_MAX/2 - PAD_HEIGHT/2; 
+    reg [9:0] y_pad_next;
+    
+    // PADDLE P2
+    parameter X_PAD2_L = 597;
+    parameter X_PAD2_R = 603;  // 6 pixels wide
+    wire [9:0] y_pad2_t, y_pad2_b;
+    reg [9:0] y_pad2_reg = Y_MAX/2 - PAD_HEIGHT/2;
+    reg [9:0] y_pad2_next;
+    
+        
     // BALL
     // square rom boundaries
     parameter BALL_SIZE = 8;
@@ -91,37 +90,15 @@ module pong(
     wire [7:0] rom_data;             // data at current rom address
     wire rom_bit;                    // signify when rom data is 1 or 0 for ball rgb control
     
-    // Register Control
-    always @(posedge clk or posedge reset)
-        if(reset) begin
-            y_pad_reg <= 0;
-            x_ball_reg <= 0;
-            y_ball_reg <= 0;
-            x_delta_reg <= 10'h002;
-            y_delta_reg <= 10'h002;
-        end
-        else begin
-            y_pad_reg <= y_pad_next;
-            y_pad2_reg <= y_pad2_next;
-            x_ball_reg <= x_ball_next;
-            y_ball_reg <= y_ball_next;
-            x_delta_reg <= x_delta_next;
-            y_delta_reg <= y_delta_next;
-        end
-    
     // ball rom
     ball Ball(.addr(rom_addr), .data(rom_data));
     
     // OBJECT STATUS SIGNALS
-    wire wall_on, pad_on, pad2_on, sq_ball_on, ball_on;
-    wire [11:0] wall_rgb, pad_rgb, pad2_rgb, ball_rgb, bg_rgb;
-    
-    // pixel within wall boundaries
-    assign wall_on = ((X_WALL_L <= x) && (x <= X_WALL_R)) ? 1 : 0;
+    wire pad_on, pad2_on, sq_ball_on, ball_on;
+    wire [11:0] pad_rgb, pad2_rgb, ball_rgb, bg_rgb;
     
     // assign object colors
-    assign wall_rgb = 12'hAAA;      // gray wall
-    assign pad_rgb = 12'hD78;       // gray paddle
+    assign pad_rgb = 12'hD78;
     assign pad2_rgb = 12'h7BF;
     assign ball_rgb = 12'hFFF;      // white ball
     assign bg_rgb = 12'h111;       // close to black background
@@ -132,6 +109,7 @@ module pong(
     assign pad_on = (X_PAD_L <= x) && (x <= X_PAD_R) &&     // pixel within paddle boundaries
                     (y_pad_t <= y) && (y <= y_pad_b);
                     
+                    /*
     // Paddle Control
     always @* begin
         y_pad_next = y_pad_reg;     // no move
@@ -141,6 +119,7 @@ module pong(
             else if(down & (y_pad_b < (Y_MAX - PAD_VELOCITY)))
                 y_pad_next = y_pad_reg + PAD_VELOCITY;  // move down
     end
+    */
     
     // paddle2 
     assign y_pad2_t = y_pad2_reg;                             // paddle top position
@@ -167,13 +146,52 @@ module pong(
     assign x_ball_next = (state) ? X_MAX/2 :
                          (refresh_tick) ? x_ball_reg + x_delta_reg : x_ball_reg;
     assign y_ball_next = (state) ? Y_MAX/2 :
-                         (refresh_tick) ? y_ball_reg + y_delta_reg : y_ball_reg;
+                         (refresh_tick) ? y_ball_reg + y_delta_reg : y_ball_reg;  
+    
+    // Register Control
+    always @(posedge clk) begin
+        y_pad_reg <= y_pad_next;
+        y_pad2_reg <= y_pad2_next;
+        x_ball_reg <= x_ball_next;
+        y_ball_reg <= y_ball_next;
+        x_delta_reg <= x_delta_next;
+        y_delta_reg <= y_delta_next;
+    end
+    
+    always @(posedge reset or posedge start or posedge p1_score or posedge p2_score) begin
+        if (reset)begin
+            state <= 1'b1;
+        end
+        else if(start & state) begin
+            state <= 1'b0;
+            p1_score <= 1'b0;
+            p2_score <= 1'b0;
+        end
+        else if(p1_score | p2_score) begin
+            state <= 1'b1;
+        end
+    end
+    
+    always @* begin
+        // p1_score <= 1'b0;
+        // p2_score <= 1'b0;
+        if(x_ball_r < 1) begin
+            p2_score <= 1'b1;
+            end
+        else if(x_ball_r > X_MAX) begin
+            p1_score <= 1'b1;
+            end
+    end      
     
     // change ball direction after collision
     always @* begin
-        x_delta_next = x_delta_reg;
-        y_delta_next = y_delta_reg;
-        if(y_ball_t < 1)                                            // collide with top
+        x_delta_next = x_delta_reg; // not collide and state = 0
+        y_delta_next = y_delta_reg; // not coolide and state = 0
+        if(state) begin
+            x_delta_next = BALL_VELOCITY_POS;
+            y_delta_next = BALL_VELOCITY_NEG;
+        end
+        if(y_ball_t < 1)                                       // collide with top
             y_delta_next = BALL_VELOCITY_POS;                       // move down
         else if(y_ball_b > Y_MAX)                                   // collide with bottom
             y_delta_next = BALL_VELOCITY_NEG;                       // move up
@@ -184,49 +202,20 @@ module pong(
                 (y_pad2_t <= y_ball_b) && (y_ball_t <= y_pad2_b))   // collide with paddle 2
             x_delta_next = BALL_VELOCITY_NEG;                       // move right
     end
-     
-    wire [3:0] rand_out;
-    
-    lfsr4 Random(.clk(clk), .reset(reset), .rand_out(rand_out));
     
     always @* begin
-        if(state&&start)
-            begin
-                assign state = 0;
-                case (rand_out)
-                    4'b000: begin
-                            x_delta_next = BALL_VELOCITY_POS;
-                            y_delta_next = BALL_VELOCITY_POS;
-                            end
-                    4'b001: begin
-                            x_delta_next = BALL_VELOCITY_POS;
-                            y_delta_next = BALL_VELOCITY_NEG;
-                            end
-                    4'b010: begin
-                            x_delta_next = BALL_VELOCITY_POS;
-                            y_delta_next = BALL_VELOCITY_POS;
-                            end
-                    4'b000: begin
-                            x_delta_next = BALL_VELOCITY_POS;
-                            x_delta_next = BALL_VELOCITY_POS;
-                            end
-                endcase 
-            end
-    end               
-    
-    always @* begin
-        p1_score <= 1'b0;
-        p2_score <= 1'b0;
-        if(x_ball_r < 1) begin
-            state <= 1;
-            p2_score <= 1;
-            end
-        else if(x_ball_r > X_MAX) begin
-            state <= 1;
-            p1_score <= 1;
-            end
-    end     
-    
+        // pad1 and pad2 stay in the same pos in state1
+        if(state) begin
+            y_pad_next = y_pad_reg;
+            y_pad2_next = y_pad_reg;
+        end
+        // for debugginginginginginij
+        else begin
+            y_pad_next = 0;
+            y_pad2_next = 0;
+        end
+    end
+        
     // rgb multiplexing circuit
     always @*
         if(~video_on)
@@ -240,6 +229,5 @@ module pong(
                 rgb = ball_rgb;     // ball color
             else
                 rgb = bg_rgb;       // background
-                
                 
 endmodule

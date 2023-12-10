@@ -33,7 +33,6 @@ module main(
     
     wire [11:0] rgb;
     wire [1:0] reset;
-    wire [1:0] state;
     wire [1:0] start;
     
 	assign rgb = {vgaRed, vgaGreen, vgaBlue};
@@ -43,22 +42,22 @@ module main(
 	wire tick;
 	wire [9:0] x, y;
 	reg [11:0] rgb_reg;    // register for Basys 3 12-bit RGB DAC 
-	wire [1:0] state, p1_score, p2_score;
+	// wire state;
+	wire p1_score, p2_score;
 	wire [11:0] rgb_next;
 	wire video_on;         // Same signal as in controller
 
     vga_controller vga_c(.clk(clk), .reset(reset), .hsync(Hsync), .vsync(Vsync),
                          .video_on(video_on), .p_tick(tick), .x(x), .y(y));
+                         
     pong p(.clk(clk), .reset(reset), .start(start), .up(reset), 
            .down(reset),  .video_on(video_on), .x(x), .y(y), 
-           .state(state), .p1_score(p1_score), .p2_score(p2_score), .rgb(rgb_next));
+           .p1_score(p1_score), .p2_score(p2_score), .rgb(rgb_next));
            
-    // RGB Buffer
     always @(posedge clk)
         if(tick)
             rgb_reg <= rgb_next;
     
-    // Output
     assign rgb = rgb_reg;
      
 endmodule
