@@ -24,7 +24,7 @@ module pongTxt(
     ascii_rom ascii_unit(.clk(clk), .addr(rom_addr), .data(ascii_word));
     
     // assign text_on = (x[9:7] == 2) && (y[9:6] == 2);
-    assign text_on = (x[9:3] == 20) && (y[9:6] == 2);
+    assign text_on = (x[9:7] == 2) && (y[9:6] == 2);
     assign row_addr_s = y[3:0];
     assign bit_addr_s = x[2:0];
     always @* begin

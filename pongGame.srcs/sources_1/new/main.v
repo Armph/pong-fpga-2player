@@ -4,8 +4,10 @@ module main(
     input clk,             
 	input btnC,            // for reset
 	input btnU,            // for start
+	input RsRx,
 	output Hsync, 
 	output Vsync,
+	output RsTx,
 	output [3:0] vgaRed,    
 	output [3:0] vgaBlue,
 	output [3:0] vgaGreen,
@@ -24,6 +26,9 @@ module main(
     
     reg [0:0] state_reg, state_next;
     wire [9:0] w_x, w_y;
+    wire p1u, p1d, p2u, p2d, newB;
+    wire [4:0] kb;
+    wire [1:0] btn1, btn2;
     wire w_vid_on, w_p_tick, graph_on, text_on, p1_score, p2_score;
     wire [11:0] graph_rgb, text_rgb;
     reg [11:0] rgb_reg, rgb_next;
@@ -31,12 +36,17 @@ module main(
     reg gra_still, p1_inc, p2_inc;
     wire reset;
     wire start;
+    wire start2;
+    assign {p1u, p1d, p2u, p2d, newB} = kb;
     
-    reg [2:0] btn;
+    // reg [2:0] btn;
+    assign btn1 = {p1d, p1u};
+    assign btn2 = {p2d, p2u};
     
     btn reset_btn(.clk(clk), .btn_in(btnC), .btn_out(reset));
 	btn start_btn(.clk(clk), .btn_in(btnU), .btn_out(start));
-    
+	btn start2_btn(.clk(clk), .btn_in(newB), .btn_out(start2));
+    uart(.clk(clk), .RsRx(RsRx), .RsTx(RsTx), .kb(kb));
     
     // module
     vga_controller vga_unit(
@@ -52,7 +62,8 @@ module main(
     pong(
         .clk(clk),
         .reset(reset),
-        .btn(btn),
+        .btn1(btn1),
+        .btn2(btn2),
         .gra_still(gra_still),
         .video_on(w_vid_on),
         .x(w_x),
@@ -133,7 +144,7 @@ module main(
         
         case(state_reg)
             newball: begin
-                if(start) state_next = play;
+                if(start | start2) state_next = play;
             end
             
             play: begin

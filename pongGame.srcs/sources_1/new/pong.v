@@ -3,7 +3,8 @@
 module pong(
     input clk,  
     input reset,    
-    input [1:0] btn,        // btn[0] = up, btn[1] = down
+    input [1:0] btn1,
+    input [1:0] btn2,       // btn[0] = up, btn[1] = down
     input gra_still,        // still graphics - newgame, game over states
     input video_on,
     input [9:0] x,
@@ -77,6 +78,7 @@ module pong(
     always @(posedge clk or posedge reset)
         if(reset) begin
             y_pad_reg <= 204;
+            y_pad2_reg <= 204;
             x_ball_reg <= 0;
             y_ball_reg <= 0;
             x_delta_reg <= 10'h002;
@@ -84,6 +86,7 @@ module pong(
         end
         else begin
             y_pad_reg <= y_pad_next;
+            y_pad2_reg <= y_pad2_next;
             x_ball_reg <= x_ball_next;
             y_ball_reg <= y_ball_next;
             x_delta_reg <= x_delta_next;
@@ -133,9 +136,9 @@ module pong(
     always @* begin
         y_pad_next = y_pad_reg;
         if(refresh_tick)
-            if(btn[1] & (y_pad_b < (B_WALL_T - 1 - PAD_VELOCITY)))
+            if(btn1[1] & (y_pad_b < (B_WALL_T - 1 - PAD_VELOCITY)))
                 y_pad_next = y_pad_reg + PAD_VELOCITY;  // move down
-            else if(btn[0] & (y_pad_t > (T_WALL_B - 1 - PAD_VELOCITY)))
+            else if(btn1[0] & (y_pad_t > (T_WALL_B - 1 - PAD_VELOCITY)))
                 y_pad_next = y_pad_reg - PAD_VELOCITY;  // move up
     end
     
@@ -149,9 +152,9 @@ module pong(
     always @* begin
         y_pad2_next = y_pad2_reg;
         if(refresh_tick)
-            if(btn[1] & (y_pad2_b < (B_WALL_T - 1 - PAD_VELOCITY)))
+            if(btn2[1] & (y_pad2_b < (B_WALL_T - 1 - PAD_VELOCITY)))
                 y_pad2_next = y_pad2_reg + PAD_VELOCITY;  // move down
-            else if(btn[0] & (y_pad2_t > (T_WALL_B - 1 - PAD_VELOCITY)))
+            else if(btn2[0] & (y_pad2_t > (T_WALL_B - 1 - PAD_VELOCITY)))
                 y_pad2_next = y_pad2_reg - PAD_VELOCITY;  // move up
     end
     
