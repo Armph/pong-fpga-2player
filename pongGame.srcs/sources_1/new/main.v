@@ -24,8 +24,8 @@ module main(
     
     reg [0:0] state_reg, state_next;
     wire [9:0] w_x, w_y;
-    wire w_vid_on, w_p_tick, graph_on, p1_score, p2_score;
-    wire [11:0] graph_rgb;
+    wire w_vid_on, w_p_tick, graph_on, text_on, p1_score, p2_score;
+    wire [11:0] graph_rgb, text_rgb;
     reg [11:0] rgb_reg, rgb_next;
     wire [3:0] num0, num1, num2, num3;
     reg gra_still, p1_inc, p2_inc;
@@ -71,6 +71,19 @@ module main(
         .num1(num1),
         .num2(num2),
         .num3(num3));
+    
+    /*
+    pongTxt(
+        .clk(clk),
+        .x(w_x),
+        .y(w_y),
+        .num0(num0),
+        .num1(num1),
+        .num2(num2),
+        .num3(num3),
+        .text_on(text_on),
+        .text_rgb(text_rgb));
+        */
     
     wire targetClk;
     wire [18:0] tclk;
@@ -142,7 +155,12 @@ module main(
     always @*
         if(~w_vid_on) rgb_next = 12'h000; // blank
         else
-            rgb_next = graph_rgb;
+            //if (graph_on)
+                rgb_next = graph_rgb;
+                /*
+            else if (text_on)
+                rgb_next = text_rgb;
+                */
     
     assign rgb = rgb_reg;
     

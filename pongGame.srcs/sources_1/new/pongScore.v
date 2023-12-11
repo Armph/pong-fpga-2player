@@ -57,9 +57,9 @@ module pongScore(
          end
     end
     
-    assign num0 = r_p1_dig0;
-    assign num1 = r_p1_dig1;
-    assign num2 = r_p2_dig0;
-    assign num3 = r_p2_dig1;
+    assign num2 = r_p1_dig0;
+    assign num3 = r_p1_dig1;
+    assign num0 = r_p2_dig0;
+    assign num1 = r_p2_dig1;
     
 endmodule
