@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Tue Dec 12 05:01:24 2023
+| Date             : Tue Dec 12 06:16:40 2023
 | Host             : DESKTOP-SM4QN4U running 64-bit major release  (build 9200)
 | Command          : report_power -file main_power_routed.rpt -pb main_power_summary_routed.pb -rpx main_power_routed.rpx
 | Design           : main
@@ -60,7 +60,7 @@ Table of Contents
 |   Others                |     0.000 |       64 |       --- |             --- |
 |   BUFG                  |     0.000 |        1 |        32 |            3.13 |
 |   LUT as Shift Register |     0.000 |        1 |      9600 |            0.01 |
-| Signals                 |     0.002 |      510 |       --- |             --- |
+| Signals                 |     0.002 |      511 |       --- |             --- |
 | I/O                     |     0.031 |       30 |       106 |           28.30 |
 | Static Power            |     0.072 |          |           |                 |
 | Total                   |     0.109 |          |           |                 |

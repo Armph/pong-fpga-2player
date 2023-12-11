@@ -1,24 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 12/12/2023 04:13:47 AM
-// Design Name: 
-// Module Name: uart
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module uart(
     input clk,
@@ -29,17 +9,17 @@ module uart(
     
     reg en, last_rec;
     reg [7:0] data_in;
-    reg [3:0] movement = 4'b0000;
-    reg l = 1'b0;
+    reg [3:0] keys = 4'b0000;
+    reg newB = 1'b0;
     reg lState = 1'b0; 
     wire [7:0] data_out;
     wire sent, received, baud;
     
-    assign kb = {movement,l}; 
+    assign kb = {keys, newB}; 
     
-    baudrate_gen baudrate_gen(clk, baud); // generate baud rate
-    uart_rx rx(baud, RsRx, received, data_out); // encode data to 8 bits
-    uart_tx tx(baud, data_in, en, sent, RsTx); // check if input is valid
+    baudrate_gen baudrate_gen(clk, baud);
+    uart_rx rx(baud, RsRx, received, data_out);
+    uart_tx tx(baud, data_in, en, sent, RsTx);
     
     always @(posedge baud) begin
         if (en) en = 0;
@@ -56,26 +36,24 @@ module uart(
     end
     
     always @(posedge sent) begin
-        if (sent) begin
-            case (data_in)
-                8'h77: movement[3:2] = 2'b10; 
-                8'h73: movement[3:2] = 2'b01; 
-                8'h69: movement[1:0] = 2'b10; 
-                8'h6B: movement[1:0] = 2'b01; 
-            endcase
-        end
+        case (data_in)
+            8'h77: keys[3:2] = 2'b10; 
+            8'h73: keys[3:2] = 2'b01; 
+            8'h69: keys[1:0] = 2'b10; 
+            8'h6B: keys[1:0] = 2'b01;
+        endcase
     end
     
     always @(posedge baud) begin
-        if(sent) begin // l key to throw ball
-            if(data_in == 8'h20 && lState == 1'b0) begin // l key pressed
-                l = 1'b1;
+        if(sent) begin
+            if(data_in == 8'h20 && lState == 1'b0) begin 
+                newB = 1'b1;
                 lState = 1'b1;
             end
-            else if(data_in == 8'h20 && lState == 1'b1) begin // allow only 1 l key press (single pulse)
-                l = 1'b0;
+            else if(data_in == 8'h20 && lState == 1'b1) begin
+                newB = 1'b0;
             end
-            else lState = 1'b0; // l key released
+            else lState = 1'b0;
         end
     end
 

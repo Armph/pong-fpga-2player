@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Tue Dec 12 05:01:10 2023
+| Date         : Tue Dec 12 06:16:25 2023
 | Host         : DESKTOP-SM4QN4U running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file main_control_sets_placed.rpt
 | Design       : main
@@ -50,11 +50,11 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              51 |           33 |
-| No           | No                    | Yes                    |              37 |           16 |
-| No           | Yes                   | No                     |              48 |           13 |
-| Yes          | No                    | No                     |              24 |           10 |
-| Yes          | No                    | Yes                    |              78 |           26 |
+| No           | No                    | No                     |              51 |           32 |
+| No           | No                    | Yes                    |              37 |           17 |
+| No           | Yes                   | No                     |              48 |           14 |
+| Yes          | No                    | No                     |              24 |           11 |
+| Yes          | No                    | Yes                    |              78 |           30 |
 | Yes          | Yes                   | No                     |               1 |            1 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
@@ -62,56 +62,56 @@ Table of Contents
 4. Detailed Control Set Information
 -----------------------------------
 
-+----------------------------------+--------------------------------------------+------------------------------------------------+------------------+----------------+
-|           Clock Signal           |                Enable Signal               |                Set/Reset Signal                | Slice Load Count | Bel Load Count |
-+----------------------------------+--------------------------------------------+------------------------------------------------+------------------+----------------+
-|  baud_BUFG                       | nolabel_line49/receiver/data_out[1]        |                                                |                1 |              1 |
-|  genblk1[0].fdiv/clkDiv_reg_0    |                                            |                                                |                1 |              1 |
-|  genblk1[10].fdiv/clkDiv_reg_0   |                                            |                                                |                1 |              1 |
-|  genblk1[5].fdiv/clkDiv_reg_0    |                                            |                                                |                1 |              1 |
-|  genblk1[4].fdiv/clkDiv_reg_0    |                                            |                                                |                1 |              1 |
-|  baud_BUFG                       | nolabel_line49/receiver/data_out[6]        |                                                |                1 |              1 |
-|  genblk1[7].fdiv/clkDiv_reg_0    |                                            |                                                |                1 |              1 |
-|  genblk1[6].fdiv/clkDiv_reg_0    |                                            |                                                |                1 |              1 |
-|  genblk1[8].fdiv/clkDiv_reg_0    |                                            |                                                |                1 |              1 |
-|  genblk1[2].fdiv/clkDiv_reg_0    |                                            |                                                |                1 |              1 |
-|  genblk1[3].fdiv/clkDiv_reg_0    |                                            |                                                |                1 |              1 |
-|  genblk1[11].fdiv/clkDiv_reg_0   |                                            |                                                |                1 |              1 |
-|  genblk1[13].fdiv/clkDiv_reg_0   |                                            |                                                |                1 |              1 |
-|  genblk1[12].fdiv/clkDiv_reg_0   |                                            |                                                |                1 |              1 |
-|  genblk1[14].fdiv/clkDiv_reg_0   |                                            |                                                |                1 |              1 |
-|  genblk1[15].fdiv/clkDiv_reg_0   |                                            |                                                |                1 |              1 |
-|  genblk1[16].fdiv/clkDiv_reg_0   |                                            |                                                |                1 |              1 |
-|  genblk1[1].fdiv/clkDiv_reg_0    |                                            |                                                |                1 |              1 |
-|  baud_BUFG                       | nolabel_line49/transmitter/bit_out         | nolabel_line49/transmitter/bit_out0            |                1 |              1 |
-|  genblk1[17].fdiv/clkDiv         |                                            |                                                |                1 |              1 |
-|  baud_BUFG                       | nolabel_line49/receiver/data_out[7]        |                                                |                1 |              1 |
-|  baud_BUFG                       | nolabel_line49/receiver/data_out[3]        |                                                |                1 |              1 |
-|  baud_BUFG                       | nolabel_line49/receiver/data_out[5]        |                                                |                1 |              1 |
-|  genblk1[9].fdiv/clkDiv_reg_0    |                                            |                                                |                1 |              1 |
-|  baud_BUFG                       | nolabel_line49/receiver/data_out[2]        |                                                |                1 |              1 |
-|  baud_BUFG                       | nolabel_line49/receiver/data_out[4]        |                                                |                1 |              1 |
-|  baud_BUFG                       | nolabel_line49/receiver/data_out[0]        |                                                |                1 |              1 |
-|  fdivTarget/CLK                  |                                            |                                                |                1 |              2 |
-|  nolabel_line49/transmitter/sent |                                            |                                                |                2 |              4 |
-|  clk_IBUF_BUFG                   | nolabel_line62/x_ball_reg_reg[8]_0[0]      | reset_btn/pulser_inst/AR[0]                    |                1 |              4 |
-|  clk_IBUF_BUFG                   | nolabel_line76/p1_dig1_next                | reset_btn/pulser_inst/AR[0]                    |                1 |              4 |
-|  clk_IBUF_BUFG                   | nolabel_line76/p2_dig1_next                | reset_btn/pulser_inst/AR[0]                    |                1 |              4 |
-|  clk_IBUF_BUFG                   | nolabel_line62/E[0]                        | reset_btn/pulser_inst/AR[0]                    |                1 |              4 |
-|  baud_BUFG                       |                                            | nolabel_line49/transmitter/count[7]_i_1__0_n_0 |                2 |              8 |
-|  baud_BUFG                       |                                            | nolabel_line49/receiver/count[7]_i_1_n_0       |                3 |              8 |
-|  baud_BUFG                       | nolabel_line49/transmitter/temp[7]_i_1_n_0 |                                                |                1 |              8 |
-|  baud_BUFG                       | nolabel_line49/receiver/E[0]               |                                                |                1 |              8 |
-|  vga_unit/E[0]                   |                                            | reset_btn/pulser_inst/AR[0]                    |                5 |             10 |
-|  vga_unit/E[0]                   | vga_unit/v_count_next_0                    | reset_btn/pulser_inst/AR[0]                    |                4 |             10 |
-|  clk_IBUF_BUFG                   | nolabel_line62/y_pad_next                  | reset_btn/pulser_inst/AR[0]                    |                3 |             10 |
-|  clk_IBUF_BUFG                   | nolabel_line62/y_pad2_next                 | reset_btn/pulser_inst/AR[0]                    |                4 |             10 |
-|  baud_BUFG                       |                                            |                                                |                3 |             10 |
-|  clk_IBUF_BUFG                   | vga_unit/E[0]                              | reset_btn/pulser_inst/AR[0]                    |                3 |             12 |
-|  clk_IBUF_BUFG                   |                                            |                                                |                9 |             18 |
-|  clk_IBUF_BUFG                   | vga_unit/state_reg_reg[0][0]               | reset_btn/pulser_inst/AR[0]                    |                8 |             20 |
-|  clk_IBUF_BUFG                   |                                            | reset_btn/pulser_inst/AR[0]                    |               11 |             27 |
-|  clk_IBUF_BUFG                   |                                            | nolabel_line49/baudrate_gen/clear              |                8 |             32 |
-+----------------------------------+--------------------------------------------+------------------------------------------------+------------------+----------------+
++--------------------------------+---------------------------------------+---------------------------------------+------------------+----------------+
+|          Clock Signal          |             Enable Signal             |            Set/Reset Signal           | Slice Load Count | Bel Load Count |
++--------------------------------+---------------------------------------+---------------------------------------+------------------+----------------+
+|  baud_BUFG                     | nolabel_line49/rx/data_out[3]         |                                       |                1 |              1 |
+|  genblk1[12].fdiv/clkDiv_reg_0 |                                       |                                       |                1 |              1 |
+|  genblk1[14].fdiv/clkDiv_reg_0 |                                       |                                       |                1 |              1 |
+|  genblk1[13].fdiv/clkDiv_reg_0 |                                       |                                       |                1 |              1 |
+|  genblk1[2].fdiv/clkDiv_reg_0  |                                       |                                       |                1 |              1 |
+|  genblk1[11].fdiv/clkDiv_reg_0 |                                       |                                       |                1 |              1 |
+|  baud_BUFG                     | nolabel_line49/tx/bit_out             | nolabel_line49/tx/bit_out0            |                1 |              1 |
+|  genblk1[6].fdiv/clkDiv_reg_0  |                                       |                                       |                1 |              1 |
+|  genblk1[7].fdiv/clkDiv_reg_0  |                                       |                                       |                1 |              1 |
+|  baud_BUFG                     | nolabel_line49/rx/data_out[7]         |                                       |                1 |              1 |
+|  genblk1[3].fdiv/clkDiv_reg_0  |                                       |                                       |                1 |              1 |
+|  baud_BUFG                     | nolabel_line49/rx/data_out[5]         |                                       |                1 |              1 |
+|  baud_BUFG                     | nolabel_line49/rx/data_out[1]         |                                       |                1 |              1 |
+|  baud_BUFG                     | nolabel_line49/rx/data_out[6]         |                                       |                1 |              1 |
+|  baud_BUFG                     | nolabel_line49/rx/data_out[0]         |                                       |                1 |              1 |
+|  baud_BUFG                     | nolabel_line49/rx/data_out[2]         |                                       |                1 |              1 |
+|  baud_BUFG                     | nolabel_line49/rx/data_out[4]         |                                       |                1 |              1 |
+|  genblk1[5].fdiv/clkDiv_reg_0  |                                       |                                       |                1 |              1 |
+|  genblk1[4].fdiv/clkDiv_reg_0  |                                       |                                       |                1 |              1 |
+|  genblk1[8].fdiv/clkDiv_reg_0  |                                       |                                       |                1 |              1 |
+|  genblk1[0].fdiv/clkDiv_reg_0  |                                       |                                       |                1 |              1 |
+|  genblk1[10].fdiv/clkDiv_reg_0 |                                       |                                       |                1 |              1 |
+|  genblk1[15].fdiv/clkDiv_reg_0 |                                       |                                       |                1 |              1 |
+|  genblk1[9].fdiv/clkDiv_reg_0  |                                       |                                       |                1 |              1 |
+|  genblk1[17].fdiv/clkDiv       |                                       |                                       |                1 |              1 |
+|  genblk1[1].fdiv/clkDiv_reg_0  |                                       |                                       |                1 |              1 |
+|  genblk1[16].fdiv/clkDiv_reg_0 |                                       |                                       |                1 |              1 |
+|  fdivTarget/CLK                |                                       |                                       |                1 |              2 |
+|  nolabel_line49/tx/sent        |                                       |                                       |                2 |              4 |
+|  clk_IBUF_BUFG                 | nolabel_line62/E[0]                   | reset_btn/pulser_inst/AR[0]           |                1 |              4 |
+|  clk_IBUF_BUFG                 | nolabel_line62/x_ball_reg_reg[8]_0[0] | reset_btn/pulser_inst/AR[0]           |                1 |              4 |
+|  clk_IBUF_BUFG                 | nolabel_line76/p2_dig1_next           | reset_btn/pulser_inst/AR[0]           |                1 |              4 |
+|  clk_IBUF_BUFG                 | nolabel_line76/p1_dig1_next           | reset_btn/pulser_inst/AR[0]           |                1 |              4 |
+|  baud_BUFG                     |                                       | nolabel_line49/rx/count[7]_i_1_n_0    |                4 |              8 |
+|  baud_BUFG                     | nolabel_line49/rx/E[0]                |                                       |                1 |              8 |
+|  baud_BUFG                     | nolabel_line49/tx/tmp[7]_i_1_n_0      |                                       |                2 |              8 |
+|  baud_BUFG                     |                                       | nolabel_line49/tx/count[7]_i_1__0_n_0 |                2 |              8 |
+|  baud_BUFG                     |                                       |                                       |                3 |             10 |
+|  vga_unit/E[0]                 | vga_unit/v_count_next_0               | reset_btn/pulser_inst/AR[0]           |                4 |             10 |
+|  vga_unit/E[0]                 |                                       | reset_btn/pulser_inst/AR[0]           |                5 |             10 |
+|  clk_IBUF_BUFG                 | nolabel_line62/y_pad_next             | reset_btn/pulser_inst/AR[0]           |                4 |             10 |
+|  clk_IBUF_BUFG                 | nolabel_line62/y_pad2_next            | reset_btn/pulser_inst/AR[0]           |                4 |             10 |
+|  clk_IBUF_BUFG                 | vga_unit/E[0]                         | reset_btn/pulser_inst/AR[0]           |                6 |             12 |
+|  clk_IBUF_BUFG                 |                                       |                                       |                8 |             18 |
+|  clk_IBUF_BUFG                 | vga_unit/state_reg_reg[0][0]          | reset_btn/pulser_inst/AR[0]           |                8 |             20 |
+|  clk_IBUF_BUFG                 |                                       | reset_btn/pulser_inst/AR[0]           |               12 |             27 |
+|  clk_IBUF_BUFG                 |                                       | nolabel_line49/baudrate_gen/clear     |                8 |             32 |
++--------------------------------+---------------------------------------+---------------------------------------+------------------+----------------+
 
 
