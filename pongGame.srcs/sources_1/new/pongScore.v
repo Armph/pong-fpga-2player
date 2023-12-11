@@ -36,7 +36,7 @@ module pongScore(
             p1_dig0 <= 3'b000;
             p1_dig1 <= 3'b000;
         end
-        else begin
+        else if(p1_score) begin
             if (p1_dig0 == 9) p1_dig1 <= (p1_dig1+1)%0;
             p1_dig0 <= (p1_dig0+1)%10;
         end
@@ -47,7 +47,7 @@ module pongScore(
             p2_dig0 <= 3'b000;
             p2_dig1 <= 3'b000;
         end
-        else begin
+        else if(p2_score) begin
             if (p2_dig0 == 9) p2_dig1 <= (p2_dig1+1)%0;
             p2_dig0 <= (p2_dig0+1)%10;
         end

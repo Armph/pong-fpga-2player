@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Mon Dec 11 10:30:16 2023
+| Date             : Mon Dec 11 12:52:54 2023
 | Host             : DESKTOP-SM4QN4U running 64-bit major release  (build 9200)
 | Command          : report_power -file main_power_routed.rpt -pb main_power_summary_routed.pb -rpx main_power_routed.rpx
 | Design           : main
@@ -30,7 +30,7 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.098        |
+| Total On-Chip Power (W)  | 0.099        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
 | Dynamic (W)              | 0.027        |
@@ -52,16 +52,16 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |    <0.001 |        3 |       --- |             --- |
-| Slice Logic    |     0.001 |      509 |       --- |             --- |
-|   LUT as Logic |    <0.001 |      201 |     20800 |            0.97 |
-|   CARRY4       |    <0.001 |       34 |      8150 |            0.42 |
-|   Register     |    <0.001 |      135 |     41600 |            0.32 |
-|   Others       |     0.000 |       57 |       --- |             --- |
-| Signals        |     0.001 |      251 |       --- |             --- |
-| I/O            |     0.023 |       28 |       106 |           26.42 |
+| Clocks         |     0.001 |        3 |       --- |             --- |
+| Slice Logic    |     0.001 |      425 |       --- |             --- |
+|   LUT as Logic |     0.001 |      166 |     20800 |            0.80 |
+|   Register     |    <0.001 |      114 |     41600 |            0.27 |
+|   CARRY4       |    <0.001 |       28 |      8150 |            0.34 |
+|   Others       |     0.000 |       56 |       --- |             --- |
+| Signals        |     0.001 |      209 |       --- |             --- |
+| I/O            |     0.024 |       28 |       106 |           26.42 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.098 |          |           |                 |
+| Total          |     0.099 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -71,7 +71,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.013 |       0.003 |      0.010 |
+| Vccint    |       1.000 |     0.013 |       0.004 |      0.010 |
 | Vccaux    |       1.800 |     0.013 |       0.001 |      0.013 |
 | Vcco33    |       3.300 |     0.008 |       0.007 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |

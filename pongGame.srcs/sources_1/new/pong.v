@@ -41,7 +41,6 @@ module pong(
     
     initial begin
         state <= 1'b1;
-        n_state <= 1'b1;
         p1_score <= 1'b0;
         p2_score <= 1'b0;
     end
@@ -163,22 +162,29 @@ module pong(
     
     // Register Control
     always @(posedge clk) begin
-        y_pad_reg <= y_pad_next;
-        y_pad2_reg <= y_pad2_next;
-        x_ball_reg <= x_ball_next;
-        y_ball_reg <= y_ball_next;
-        x_delta_reg <= x_delta_next;
-        y_delta_reg <= y_delta_next;
-        state <= n_state;
-        p1_score <= n_p1;
-        p2_score <= n_p2;
+        if (reset) begin
+            state = 1'b1;
+            y_pad_reg <= Y_MAX/2 - PAD_HEIGHT/2; 
+            y_pad2_reg <= Y_MAX/2 - PAD_HEIGHT/2;
+            p1_score <= 1'b0;
+            p2_score <= 1'b0;
+        end
+        else begin
+            y_pad_reg <= y_pad_next;
+            y_pad2_reg <= y_pad2_next;
+            x_ball_reg <= x_ball_next;
+            y_ball_reg <= y_ball_next;
+            x_delta_reg <= x_delta_next;
+            y_delta_reg <= y_delta_next;
+            state <= n_state;
+            p1_score <= n_p1;
+            p2_score <= n_p2;
+        end
     end
     
     always @* begin//@(posedge reset or posedge start or posedge p1_score or posedge p2_score) begin
-        if (reset)begin
-            n_state <= 1'b1;
-        end
-        else if(start & state) begin
+        n_state <= state;
+        if(start & state) begin
             n_state <= 1'b0;
             n_p1 <= 1'b0;
             n_p2 <= 1'b0;
