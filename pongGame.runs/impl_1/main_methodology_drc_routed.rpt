@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Tue Dec 12 00:40:11 2023
+| Date         : Tue Dec 12 01:03:24 2023
 | Host         : DESKTOP-SM4QN4U running 64-bit major release  (build 9200)
 | Command      : report_methodology -file main_methodology_drc_routed.rpt -pb main_methodology_drc_routed.pb -rpx main_methodology_drc_routed.rpx
 | Design       : main
@@ -125,12 +125,12 @@ Related violations: <none>
 
 TIMING-17#19 Warning
 Non-clocked sequential cell  
-The clock pin nolabel_line111/ps_reg[0]/C is not reached by a timing clock
+The clock pin nolabel_line90/ps_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#20 Warning
 Non-clocked sequential cell  
-The clock pin nolabel_line111/ps_reg[1]/C is not reached by a timing clock
+The clock pin nolabel_line90/ps_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#21 Warning

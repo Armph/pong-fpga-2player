@@ -24,8 +24,8 @@ module pong(
     
     // WALLS
     // TOP wall boundaries
-    parameter T_WALL_T = 10;    
-    parameter T_WALL_B = 17;    // 8 pixels wide
+    parameter T_WALL_T = 1;    
+    parameter T_WALL_B = 8;    // 8 pixels wide
     // BOTTOM wall boundaries
     parameter B_WALL_T = 472;    
     parameter B_WALL_B = 479;    // 8 pixels wide
@@ -71,6 +71,7 @@ module pong(
     reg [7:0] rom_data;             // data at current rom address
     wire rom_bit;                   // signify when rom data is 1 or 0 for ball rgb control
     
+    reg [1:0] rad_way;
     
     // Register Control
     always @(posedge clk or posedge reset)
@@ -87,8 +88,8 @@ module pong(
             y_ball_reg <= y_ball_next;
             x_delta_reg <= x_delta_next;
             y_delta_reg <= y_delta_next;
+            rad_way <= (rad_way+1)%4;
         end
-    
     
     // ball rom
     always @*
@@ -185,8 +186,24 @@ module pong(
         y_delta_next = y_delta_reg;
         
         if(gra_still) begin
-            x_delta_next = BALL_VELOCITY_NEG;
-            y_delta_next = BALL_VELOCITY_POS;
+            case(rad_way)
+                2'b00: begin
+                    x_delta_next = BALL_VELOCITY_POS;
+                    y_delta_next = BALL_VELOCITY_POS;
+                end
+                2'b01: begin
+                    x_delta_next = BALL_VELOCITY_POS;
+                    y_delta_next = BALL_VELOCITY_NEG;
+                end
+                2'b10: begin
+                    x_delta_next = BALL_VELOCITY_NEG;
+                    y_delta_next = BALL_VELOCITY_POS;
+                end
+                2'b11: begin
+                    x_delta_next = BALL_VELOCITY_NEG;
+                    y_delta_next = BALL_VELOCITY_NEG;
+                end
+            endcase 
         end
         
         else if(y_ball_t < T_WALL_B)            // reach top

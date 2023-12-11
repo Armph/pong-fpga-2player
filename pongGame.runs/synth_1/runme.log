@@ -14,15 +14,15 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 11224 
+INFO: Helper process launched with PID 22764 
 WARNING: [Synth 8-2611] redeclaration of ansi port segment is not allowed [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/hexTo7seg.v:37]
 WARNING: [Synth 8-976] segment has already been declared [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/hexTo7seg.v:37]
 WARNING: [Synth 8-2654] second declaration of segment ignored [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/hexTo7seg.v:37]
 INFO: [Synth 8-994] segment is declared here [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/hexTo7seg.v:25]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 391.289 ; gain = 112.078
+Starting RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 391.766 ; gain = 112.188
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'main' [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:23]
+INFO: [Synth 8-6157] synthesizing module 'main' [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:3]
 	Parameter newball bound to: 1'b0 
 	Parameter play bound to: 1'b1 
 INFO: [Synth 8-6157] synthesizing module 'nGate' [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/nGate.v:23]
@@ -49,8 +49,8 @@ INFO: [Synth 8-6155] done synthesizing module 'vga_controller' (5#1) [C:/Users/i
 INFO: [Synth 8-6157] synthesizing module 'pong' [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/pong.v:3]
 	Parameter X_MAX bound to: 639 - type: integer 
 	Parameter Y_MAX bound to: 479 - type: integer 
-	Parameter T_WALL_T bound to: 10 - type: integer 
-	Parameter T_WALL_B bound to: 17 - type: integer 
+	Parameter T_WALL_T bound to: 1 - type: integer 
+	Parameter T_WALL_B bound to: 8 - type: integer 
 	Parameter B_WALL_T bound to: 472 - type: integer 
 	Parameter B_WALL_B bound to: 479 - type: integer 
 	Parameter PAD_HEIGHT bound to: 72 - type: integer 
@@ -62,8 +62,9 @@ INFO: [Synth 8-6157] synthesizing module 'pong' [C:/Users/iHC/Desktop/2110361HWS
 	Parameter BALL_SIZE bound to: 8 - type: integer 
 	Parameter BALL_VELOCITY_POS bound to: 2 - type: integer 
 	Parameter BALL_VELOCITY_NEG bound to: -2 - type: integer 
+WARNING: [Synth 8-5788] Register rad_way_reg in module pong is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/pong.v:91]
 INFO: [Synth 8-6155] done synthesizing module 'pong' (6#1) [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/pong.v:3]
-WARNING: [Synth 8-689] width (3) of port connection 'btn' does not match port width (2) of module 'pong' [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:76]
+WARNING: [Synth 8-689] width (3) of port connection 'btn' does not match port width (2) of module 'pong' [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:55]
 INFO: [Synth 8-6157] synthesizing module 'pongScore' [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/pongScore.v:3]
 INFO: [Synth 8-6155] done synthesizing module 'pongScore' (7#1) [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/pongScore.v:3]
 INFO: [Synth 8-6157] synthesizing module 'quad7seg' [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/quad7seg.v:23]
@@ -74,13 +75,13 @@ WARNING: [Synth 8-567] referenced signal 'num1' should be on the sensitivity lis
 WARNING: [Synth 8-567] referenced signal 'num2' should be on the sensitivity list [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/quad7seg.v:66]
 WARNING: [Synth 8-567] referenced signal 'num3' should be on the sensitivity list [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/quad7seg.v:66]
 INFO: [Synth 8-6155] done synthesizing module 'quad7seg' (9#1) [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/quad7seg.v:23]
-WARNING: [Synth 8-3848] Net vgaRed in module/entity main does not have driver. [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:29]
-WARNING: [Synth 8-3848] Net vgaBlue in module/entity main does not have driver. [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:30]
-WARNING: [Synth 8-3848] Net vgaGreen in module/entity main does not have driver. [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:31]
-WARNING: [Synth 8-3848] Net btn in module/entity main does not have driver. [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:56]
-INFO: [Synth 8-6155] done synthesizing module 'main' (10#1) [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:23]
+WARNING: [Synth 8-3848] Net vgaRed in module/entity main does not have driver. [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:9]
+WARNING: [Synth 8-3848] Net vgaBlue in module/entity main does not have driver. [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:10]
+WARNING: [Synth 8-3848] Net vgaGreen in module/entity main does not have driver. [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:11]
+WARNING: [Synth 8-3848] Net btn in module/entity main does not have driver. [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:35]
+INFO: [Synth 8-6155] done synthesizing module 'main' (10#1) [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:3]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 427.066 ; gain = 147.855
+Finished RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 427.312 ; gain = 147.734
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -89,16 +90,16 @@ Report Check Netlist:
 +------+------------------+-------+---------+-------+------------------+
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
-WARNING: [Synth 8-3295] tying undriven pin nolabel_line73:btn[1] to constant 0 [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:73]
-WARNING: [Synth 8-3295] tying undriven pin nolabel_line73:btn[0] to constant 0 [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:73]
+WARNING: [Synth 8-3295] tying undriven pin nolabel_line52:btn[1] to constant 0 [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:52]
+WARNING: [Synth 8-3295] tying undriven pin nolabel_line52:btn[0] to constant 0 [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/sources_1/new/main.v:52]
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 427.066 ; gain = 147.855
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 427.312 ; gain = 147.734
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 427.066 ; gain = 147.855
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 427.312 ; gain = 147.734
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -187,40 +188,42 @@ Resolution: If [get_<value>] was used to populate the object, check to make sure
 Finished Parsing XDC File [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/constrs_1/new/Basys-3-Master.xdc]
 INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/constrs_1/new/Basys-3-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/main_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/main_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 769.227 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 767.785 ; gain = 0.000
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 769.254 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 767.793 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 769.254 ; gain = 0.000
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 769.254 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 767.793 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 767.793 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 769.254 ; gain = 490.043
+Finished Constraint Validation : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 767.793 ; gain = 488.215
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 769.254 ; gain = 490.043
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 767.793 ; gain = 488.215
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 769.254 ; gain = 490.043
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 767.793 ; gain = 488.215
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5544] ROM "w_25MHz" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5546] ROM "v_count_next" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5544] ROM "x_delta_next" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "y_delta_next" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "rom_data" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "x_delta_next" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "y_delta_next" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "p1_dig1_next" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "p2_dig1_next" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 769.254 ; gain = 490.043
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 767.793 ; gain = 488.215
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -236,17 +239,18 @@ Detailed RTL Component Info :
 	   2 Input     10 Bit       Adders := 6     
 	   2 Input      4 Bit       Adders := 4     
 	   3 Input      3 Bit       Adders := 2     
-	   2 Input      2 Bit       Adders := 2     
+	   2 Input      2 Bit       Adders := 3     
 +---Registers : 
 	               12 Bit    Registers := 1     
 	               10 Bit    Registers := 9     
 	                4 Bit    Registers := 4     
-	                2 Bit    Registers := 2     
+	                2 Bit    Registers := 3     
 	                1 Bit    Registers := 32    
 +---Muxes : 
 	   6 Input     12 Bit        Muxes := 1     
 	   2 Input     12 Bit        Muxes := 1     
 	   2 Input     10 Bit        Muxes := 4     
+	   4 Input     10 Bit        Muxes := 2     
 	   8 Input      8 Bit        Muxes := 1     
 	   2 Input      4 Bit        Muxes := 4     
 	   4 Input      4 Bit        Muxes := 2     
@@ -294,11 +298,14 @@ Detailed RTL Component Info :
 +---Adders : 
 	   2 Input     10 Bit       Adders := 4     
 	   3 Input      3 Bit       Adders := 2     
+	   2 Input      2 Bit       Adders := 1     
 +---Registers : 
 	               10 Bit    Registers := 5     
+	                2 Bit    Registers := 1     
 +---Muxes : 
 	   6 Input     12 Bit        Muxes := 1     
 	   2 Input     10 Bit        Muxes := 4     
+	   4 Input     10 Bit        Muxes := 2     
 	   8 Input      8 Bit        Muxes := 1     
 	   2 Input      3 Bit        Muxes := 1     
 	   2 Input      1 Bit        Muxes := 6     
@@ -340,35 +347,37 @@ Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 Warning: Parallel synthesis criteria is not met 
 INFO: [Synth 8-5544] ROM "vga_unit/w_25MHz" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "nolabel_line52/" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "nolabel_line52/" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5546] ROM "vga_unit/v_count_next" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/x_delta_reg_reg[3]' (FDCE) to 'nolabel_line73/x_delta_reg_reg[9]'
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/x_delta_reg_reg[4]' (FDCE) to 'nolabel_line73/x_delta_reg_reg[9]'
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/x_delta_reg_reg[5]' (FDCE) to 'nolabel_line73/x_delta_reg_reg[9]'
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/x_delta_reg_reg[6]' (FDCE) to 'nolabel_line73/x_delta_reg_reg[9]'
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/x_delta_reg_reg[7]' (FDCE) to 'nolabel_line73/x_delta_reg_reg[9]'
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/x_delta_reg_reg[8]' (FDCE) to 'nolabel_line73/x_delta_reg_reg[9]'
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/x_delta_reg_reg[9]' (FDCE) to 'nolabel_line73/x_delta_reg_reg[2]'
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\nolabel_line73/x_delta_reg_reg[0] )
-INFO: [Synth 8-3333] propagating constant 1 across sequential element (\nolabel_line73/x_delta_reg_reg[1] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\nolabel_line73/y_delta_reg_reg[0] )
-INFO: [Synth 8-3333] propagating constant 1 across sequential element (\nolabel_line73/y_delta_reg_reg[1] )
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/y_delta_reg_reg[2]' (FDCE) to 'nolabel_line73/y_delta_reg_reg[9]'
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/y_delta_reg_reg[3]' (FDCE) to 'nolabel_line73/y_delta_reg_reg[9]'
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/y_delta_reg_reg[4]' (FDCE) to 'nolabel_line73/y_delta_reg_reg[9]'
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/y_delta_reg_reg[5]' (FDCE) to 'nolabel_line73/y_delta_reg_reg[9]'
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/y_delta_reg_reg[6]' (FDCE) to 'nolabel_line73/y_delta_reg_reg[9]'
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/y_delta_reg_reg[7]' (FDCE) to 'nolabel_line73/y_delta_reg_reg[9]'
-INFO: [Synth 8-3886] merging instance 'nolabel_line73/y_delta_reg_reg[8]' (FDCE) to 'nolabel_line73/y_delta_reg_reg[9]'
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (p_0_out_inferred/\nolabel_line73/y_pad_reg_reg[8] )
-INFO: [Synth 8-3333] propagating constant 1 across sequential element (p_0_out_inferred/\nolabel_line73/y_pad_reg_reg[7] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (p_0_out_inferred/\nolabel_line73/y_pad_reg_reg[5] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (p_0_out_inferred/\nolabel_line73/y_pad_reg_reg[4] )
-INFO: [Synth 8-3333] propagating constant 1 across sequential element (p_0_out_inferred/\nolabel_line73/y_pad_reg_reg[3] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (p_0_out_inferred/\nolabel_line73/y_pad_reg_reg[0] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (p_0_out_inferred/\nolabel_line73/y_pad_reg_reg[1] )
-INFO: [Synth 8-3333] propagating constant 1 across sequential element (p_0_out_inferred/\nolabel_line73/y_pad_reg_reg[2] )
-INFO: [Synth 8-3333] propagating constant 1 across sequential element (p_0_out_inferred/\nolabel_line73/y_pad_reg_reg[6] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (p_0_out_inferred/\nolabel_line73/y_pad_reg_reg[9] )
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/x_delta_reg_reg[3]' (FDCE) to 'nolabel_line52/x_delta_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/x_delta_reg_reg[4]' (FDCE) to 'nolabel_line52/x_delta_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/x_delta_reg_reg[5]' (FDCE) to 'nolabel_line52/x_delta_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/x_delta_reg_reg[6]' (FDCE) to 'nolabel_line52/x_delta_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/x_delta_reg_reg[7]' (FDCE) to 'nolabel_line52/x_delta_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/x_delta_reg_reg[8]' (FDCE) to 'nolabel_line52/x_delta_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/x_delta_reg_reg[9]' (FDCE) to 'nolabel_line52/x_delta_reg_reg[2]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\nolabel_line52/x_delta_reg_reg[0] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\nolabel_line52/x_delta_reg_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\nolabel_line52/y_delta_reg_reg[0] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\nolabel_line52/y_delta_reg_reg[1] )
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/y_delta_reg_reg[2]' (FDCE) to 'nolabel_line52/y_delta_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/y_delta_reg_reg[3]' (FDCE) to 'nolabel_line52/y_delta_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/y_delta_reg_reg[4]' (FDCE) to 'nolabel_line52/y_delta_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/y_delta_reg_reg[5]' (FDCE) to 'nolabel_line52/y_delta_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/y_delta_reg_reg[6]' (FDCE) to 'nolabel_line52/y_delta_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/y_delta_reg_reg[7]' (FDCE) to 'nolabel_line52/y_delta_reg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'nolabel_line52/y_delta_reg_reg[8]' (FDCE) to 'nolabel_line52/y_delta_reg_reg[9]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (p_0_out_inferred/\nolabel_line52/y_pad_reg_reg[8] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (p_0_out_inferred/\nolabel_line52/y_pad_reg_reg[7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (p_0_out_inferred/\nolabel_line52/y_pad_reg_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (p_0_out_inferred/\nolabel_line52/y_pad_reg_reg[4] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (p_0_out_inferred/\nolabel_line52/y_pad_reg_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (p_0_out_inferred/\nolabel_line52/y_pad_reg_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (p_0_out_inferred/\nolabel_line52/y_pad_reg_reg[1] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (p_0_out_inferred/\nolabel_line52/y_pad_reg_reg[2] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (p_0_out_inferred/\nolabel_line52/y_pad_reg_reg[6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (p_0_out_inferred/\nolabel_line52/y_pad_reg_reg[9] )
 INFO: [Synth 8-3886] merging instance 'rgb_reg_reg[4]' (FDCE) to 'rgb_reg_reg[8]'
 INFO: [Synth 8-3886] merging instance 'rgb_reg_reg[5]' (FDCE) to 'rgb_reg_reg[3]'
 INFO: [Synth 8-3886] merging instance 'rgb_reg_reg[6]' (FDCE) to 'rgb_reg_reg[11]'
@@ -377,7 +386,7 @@ INFO: [Synth 8-3886] merging instance 'rgb_reg_reg[1]' (FDCE) to 'rgb_reg_reg[2]
 INFO: [Synth 8-3886] merging instance 'rgb_reg_reg[2]' (FDCE) to 'rgb_reg_reg[9]'
 INFO: [Synth 8-3886] merging instance 'rgb_reg_reg[3]' (FDCE) to 'rgb_reg_reg[10]'
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 769.254 ; gain = 490.043
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 767.793 ; gain = 488.215
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -389,13 +398,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 769.254 ; gain = 490.043
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 767.793 ; gain = 488.215
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 787.164 ; gain = 507.953
+Finished Timing Optimization : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 786.051 ; gain = 506.473
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -407,7 +416,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 796.238 ; gain = 517.027
+Finished Technology Mapping : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 795.105 ; gain = 515.527
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -431,7 +440,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 796.238 ; gain = 517.027
+Finished IO Insertion : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 795.105 ; gain = 515.527
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -444,7 +453,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 796.238 ; gain = 517.027
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 795.105 ; gain = 515.527
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -456,25 +465,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 796.238 ; gain = 517.027
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 795.105 ; gain = 515.527
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 796.238 ; gain = 517.027
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 795.105 ; gain = 515.527
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 796.238 ; gain = 517.027
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 795.105 ; gain = 515.527
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 796.238 ; gain = 517.027
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 795.105 ; gain = 515.527
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -493,14 +502,14 @@ Report Cell Usage:
 |1     |BUFG   |     1|
 |2     |CARRY4 |    22|
 |3     |LUT1   |    26|
-|4     |LUT2   |    70|
-|5     |LUT3   |    31|
-|6     |LUT4   |    56|
-|7     |LUT5   |    29|
-|8     |LUT6   |    67|
+|4     |LUT2   |    75|
+|5     |LUT3   |    29|
+|6     |LUT4   |    54|
+|7     |LUT5   |    32|
+|8     |LUT6   |    70|
 |9     |MUXF7  |     1|
 |10    |FDCE   |    88|
-|11    |FDRE   |    31|
+|11    |FDRE   |    33|
 |12    |IBUF   |     3|
 |13    |OBUF   |    25|
 +------+-------+------+
@@ -509,7 +518,7 @@ Report Instance Areas:
 +------+---------------------+----------------+------+
 |      |Instance             |Module          |Cells |
 +------+---------------------+----------------+------+
-|1     |top                  |                |   450|
+|1     |top                  |                |   459|
 |2     |  fdivTarget         |nGate           |     2|
 |3     |  \genblk1[0].fdiv   |nGate_0         |     2|
 |4     |  \genblk1[10].fdiv  |nGate_1         |     2|
@@ -529,39 +538,39 @@ Report Instance Areas:
 |18    |  \genblk1[7].fdiv   |nGate_15        |     2|
 |19    |  \genblk1[8].fdiv   |nGate_16        |     2|
 |20    |  \genblk1[9].fdiv   |nGate_17        |     2|
-|21    |  nolabel_line111    |quad7seg        |     8|
-|22    |  nolabel_line73     |pong            |   162|
-|23    |  nolabel_line86     |pongScore       |    45|
+|21    |  nolabel_line52     |pong            |   175|
+|22    |  nolabel_line65     |pongScore       |    45|
+|23    |  nolabel_line90     |quad7seg        |     8|
 |24    |  reset_btn          |btn             |     6|
 |25    |    deb_inst         |debounce_19     |     4|
 |26    |    pulser_inst      |singlePulser_20 |     2|
 |27    |  start_btn          |btn_18          |     6|
 |28    |    deb_inst         |debounce        |     4|
 |29    |    pulser_inst      |singlePulser    |     2|
-|30    |  vga_unit           |vga_controller  |   150|
+|30    |  vga_unit           |vga_controller  |   146|
 +------+---------------------+----------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 796.238 ; gain = 517.027
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 795.105 ; gain = 515.527
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:07 ; elapsed = 00:00:10 . Memory (MB): peak = 796.238 ; gain = 174.840
-Synthesis Optimization Complete : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 796.238 ; gain = 517.027
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:07 ; elapsed = 00:00:10 . Memory (MB): peak = 795.105 ; gain = 175.047
+Synthesis Optimization Complete : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 795.105 ; gain = 515.527
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 23 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 796.238 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 795.105 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
-78 Infos, 40 Warnings, 26 Critical Warnings and 0 Errors encountered.
+82 Infos, 41 Warnings, 26 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 796.238 ; gain = 529.715
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 796.238 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 795.105 ; gain = 527.797
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 795.105 ; gain = 0.000
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
 INFO: [Common 17-1381] The checkpoint 'C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.runs/synth_1/main.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file main_utilization_synth.rpt -pb main_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Tue Dec 12 00:39:34 2023...
+INFO: [Common 17-206] Exiting Vivado at Tue Dec 12 01:02:47 2023...
