@@ -64,10 +64,10 @@ module quad7seg(
     always @(ps)
     begin
         case(ps)
-            2'b00: hex = num0;
-            2'b01: hex = num1;
-            2'b10: hex = num2;
-            2'b11: hex = num3;       
+            2'b00: hex = num3;
+            2'b01: hex = num2;
+            2'b10: hex = num1;
+            2'b11: hex = num0;      
         endcase
     end 
     

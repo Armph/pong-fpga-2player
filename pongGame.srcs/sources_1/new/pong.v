@@ -34,9 +34,14 @@ module pong(
     );
     
     reg [1:0] state;
+    reg [1:0] n_state;
+    
+    reg [1:0] n_p1;
+    reg [1:0] n_p2;
     
     initial begin
-        state <= 1'b0;
+        state <= 1'b1;
+        n_state <= 1'b1;
         p1_score <= 1'b0;
         p2_score <= 1'b0;
     end
@@ -109,7 +114,6 @@ module pong(
     assign pad_on = (X_PAD_L <= x) && (x <= X_PAD_R) &&     // pixel within paddle boundaries
                     (y_pad_t <= y) && (y <= y_pad_b);
                     
-                    /*
     // Paddle Control
     always @* begin
         y_pad_next = y_pad_reg;     // no move
@@ -119,13 +123,22 @@ module pong(
             else if(down & (y_pad_b < (Y_MAX - PAD_VELOCITY)))
                 y_pad_next = y_pad_reg + PAD_VELOCITY;  // move down
     end
-    */
     
     // paddle2 
     assign y_pad2_t = y_pad2_reg;                             // paddle top position
     assign y_pad2_b = y_pad2_t + PAD_HEIGHT - 1;              // paddle bottom position
     assign pad2_on = (X_PAD2_L <= x) && (x <= X_PAD2_R) &&     // pixel within paddle boundaries
                     (y_pad2_t <= y) && (y <= y_pad2_b);
+    
+    // Paddle2 Control
+    always @* begin
+        y_pad2_next = y_pad2_reg;     // no move
+        if(refresh_tick)
+            if(up & (y_pad2_t > PAD_VELOCITY))
+                y_pad2_next = y_pad2_reg - PAD_VELOCITY;  // move up
+            else if(down & (y_pad2_b < (Y_MAX - PAD_VELOCITY)))
+                y_pad2_next = y_pad2_reg + PAD_VELOCITY;  // move down
+    end
     
     
     // rom data square boundaries
@@ -156,41 +169,40 @@ module pong(
         y_ball_reg <= y_ball_next;
         x_delta_reg <= x_delta_next;
         y_delta_reg <= y_delta_next;
+        state <= n_state;
+        p1_score <= n_p1;
+        p2_score <= n_p2;
     end
     
-    always @(posedge reset or posedge start or posedge p1_score or posedge p2_score) begin
+    always @* begin//@(posedge reset or posedge start or posedge p1_score or posedge p2_score) begin
         if (reset)begin
-            state <= 1'b1;
+            n_state <= 1'b1;
         end
         else if(start & state) begin
-            state <= 1'b0;
-            p1_score <= 1'b0;
-            p2_score <= 1'b0;
+            n_state <= 1'b0;
+            n_p1 <= 1'b0;
+            n_p2 <= 1'b0;
         end
-        else if(p1_score | p2_score) begin
-            state <= 1'b1;
-        end
-    end
-    
-    always @* begin
-        // p1_score <= 1'b0;
-        // p2_score <= 1'b0;
-        if(x_ball_r < 1) begin
-            p2_score <= 1'b1;
+        else if(x_ball_r < 1) begin
+            n_p2 <= 1'b1;
+            n_state <= 1'b1;
             end
         else if(x_ball_r > X_MAX) begin
-            p1_score <= 1'b1;
+            n_p1 <= 1'b1;
+            n_state <= 1'b1;
             end
-    end      
+    end
     
     // change ball direction after collision
     always @* begin
         x_delta_next = x_delta_reg; // not collide and state = 0
         y_delta_next = y_delta_reg; // not coolide and state = 0
+        /*
         if(state) begin
             x_delta_next = BALL_VELOCITY_POS;
             y_delta_next = BALL_VELOCITY_NEG;
         end
+        */
         if(y_ball_t < 1)                                       // collide with top
             y_delta_next = BALL_VELOCITY_POS;                       // move down
         else if(y_ball_b > Y_MAX)                                   // collide with bottom
@@ -201,19 +213,6 @@ module pong(
         else if((X_PAD2_L <= x_ball_r) && (x_ball_r <= X_PAD2_R) &&
                 (y_pad2_t <= y_ball_b) && (y_ball_t <= y_pad2_b))   // collide with paddle 2
             x_delta_next = BALL_VELOCITY_NEG;                       // move right
-    end
-    
-    always @* begin
-        // pad1 and pad2 stay in the same pos in state1
-        if(state) begin
-            y_pad_next = y_pad_reg;
-            y_pad2_next = y_pad_reg;
-        end
-        // for debugginginginginginij
-        else begin
-            y_pad_next = 0;
-            y_pad2_next = 0;
-        end
     end
         
     // rgb multiplexing circuit

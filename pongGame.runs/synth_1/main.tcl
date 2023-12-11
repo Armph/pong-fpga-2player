@@ -18,6 +18,7 @@ proc create_report { reportName command } {
   }
 }
 set_param xicom.use_bs_reader 1
+set_msg_config -id {Common 17-41} -limit 10000000
 create_project -in_memory -part xc7a35tcpg236-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -35,7 +36,11 @@ read_verilog -library xil_defaultlib {
   C:/Users/iHC/Desktop/pongGame/pongGame.srcs/sources_1/new/btn.v
   C:/Users/iHC/Desktop/pongGame/pongGame.srcs/sources_1/new/clkDiv.v
   C:/Users/iHC/Desktop/pongGame/pongGame.srcs/sources_1/new/debounce.v
+  C:/Users/iHC/Desktop/pongGame/pongGame.srcs/sources_1/new/hexTo7seg.v
+  C:/Users/iHC/Desktop/pongGame/pongGame.srcs/sources_1/new/nGate.v
   C:/Users/iHC/Desktop/pongGame/pongGame.srcs/sources_1/new/pong.v
+  C:/Users/iHC/Desktop/pongGame/pongGame.srcs/sources_1/new/pongScore.v
+  C:/Users/iHC/Desktop/pongGame/pongGame.srcs/sources_1/new/quad7seg.v
   C:/Users/iHC/Desktop/pongGame/pongGame.srcs/sources_1/new/singlePulser.v
   C:/Users/iHC/Desktop/pongGame/pongGame.srcs/sources_1/new/vga_controller.v
   C:/Users/iHC/Desktop/pongGame/pongGame.srcs/sources_1/new/main.v
