@@ -21,26 +21,21 @@
 
 
 module pong(
-    input clk,  
+    input clk,
+    input state,
+    //input way,  
     input reset,
-    input start,    
     input up,
     input down,
     input video_on,
     input [9:0] x,
     input [9:0] y,
-    output reg p1_score, p2_score,
+    output reg [0:0] p1_score, 
+    output reg [0:0] p2_score,
     output reg [11:0] rgb
     );
     
-    reg [1:0] state;
-    reg [1:0] n_state;
-    
-    reg [1:0] n_p1;
-    reg [1:0] n_p2;
-    
     initial begin
-        state <= 1'b1;
         p1_score <= 1'b0;
         p2_score <= 1'b0;
     end
@@ -61,7 +56,7 @@ module pong(
     parameter X_PAD_L = 36;
     parameter X_PAD_R = 42;    // 6 pixels wide
     wire [9:0] y_pad_t, y_pad_b;
-    reg [9:0] y_pad_reg = Y_MAX/2 - PAD_HEIGHT/2; 
+    reg [9:0] y_pad_reg = Y_MAX/2 - PAD_HEIGHT/2;
     reg [9:0] y_pad_next;
     
     // PADDLE P2
@@ -87,8 +82,8 @@ module pong(
     reg [9:0] x_delta_reg, x_delta_next;
     reg [9:0] y_delta_reg, y_delta_next;
     // positive or negative ball velocity
-    parameter BALL_VELOCITY_POS = 2;
-    parameter BALL_VELOCITY_NEG = -2;
+    parameter BALL_VELOCITY_POS = 1;
+    parameter BALL_VELOCITY_NEG = -1;
     // round ball from square image
     wire [2:0] rom_addr, rom_col;    // 3-bit rom address and rom column
     wire [7:0] rom_data;             // data at current rom address
@@ -160,65 +155,71 @@ module pong(
     assign y_ball_next = (state) ? Y_MAX/2 :
                          (refresh_tick) ? y_ball_reg + y_delta_reg : y_ball_reg;  
     
+    /*
     // Register Control
-    always @(posedge clk) begin
-        if (reset) begin
-            state = 1'b1;
-            y_pad_reg <= Y_MAX/2 - PAD_HEIGHT/2; 
-            y_pad2_reg <= Y_MAX/2 - PAD_HEIGHT/2;
-            p1_score <= 1'b0;
-            p2_score <= 1'b0;
+    always @* begin
+        if((x_ball_r < 1) | (x_ball_r > X_MAX)) begin
+            state <= 1'b1;
+            // side_start <= ~side_start;
         end
-        else begin
-            y_pad_reg <= y_pad_next;
-            y_pad2_reg <= y_pad2_next;
-            x_ball_reg <= x_ball_next;
-            y_ball_reg <= y_ball_next;
-            x_delta_reg <= x_delta_next;
-            y_delta_reg <= y_delta_next;
-            state <= n_state;
-            p1_score <= n_p1;
-            p2_score <= n_p2;
+        else if (start === 1'b1) begin
+            if (state === 1'b1) begin
+                state <= 1'b0;
+            end
         end
     end
-    
-    always @* begin//@(posedge reset or posedge start or posedge p1_score or posedge p2_score) begin
-        n_state <= state;
-        if(start & state) begin
-            n_state <= 1'b0;
-            n_p1 <= 1'b0;
-            n_p2 <= 1'b0;
+    */
+    /*
+    if (reset) begin
+                state = 1'b1;
+                p1_score <= 1'b0;
+                p2_score <= 1'b0;
+            end*/
+    /*
+    always @(posedge start) begin
+        if (state) begin
+            state <= 1'b0;
         end
-        else if(x_ball_r < 1) begin
-            n_p2 <= 1'b1;
-            n_state <= 1'b1;
-            end
-        else if(x_ball_r > X_MAX) begin
-            n_p1 <= 1'b1;
-            n_state <= 1'b1;
-            end
+    end
+    */
+    
+    always @(posedge clk) begin
+        y_pad_reg <= y_pad_next;
+        y_pad2_reg <= y_pad2_next;
+        x_ball_reg <= x_ball_next;
+        y_ball_reg <= y_ball_next;
+        x_delta_reg <= x_delta_next;
+        y_delta_reg <= y_delta_next;
     end
     
     // change ball direction after collision
     always @* begin
+        p1_score <= 1'b0;
+        p2_score <= 1'b0;
         x_delta_next = x_delta_reg; // not collide and state = 0
         y_delta_next = y_delta_reg; // not coolide and state = 0
-        /*
         if(state) begin
             x_delta_next = BALL_VELOCITY_POS;
-            y_delta_next = BALL_VELOCITY_NEG;
+            y_delta_next = BALL_VELOCITY_POS;
         end
-        */
-        if(y_ball_t < 1)                                       // collide with top
-            y_delta_next = BALL_VELOCITY_POS;                       // move down
-        else if(y_ball_b > Y_MAX)                                   // collide with bottom
-            y_delta_next = BALL_VELOCITY_NEG;                       // move up
-        else if((X_PAD_L <= x_ball_r) && (x_ball_r <= X_PAD_R) &&
-                (y_pad_t <= y_ball_b) && (y_ball_t <= y_pad_b))     // collide with paddle 1
-            x_delta_next = BALL_VELOCITY_POS;                       // move left
-        else if((X_PAD2_L <= x_ball_r) && (x_ball_r <= X_PAD2_R) &&
-                (y_pad2_t <= y_ball_b) && (y_ball_t <= y_pad2_b))   // collide with paddle 2
-            x_delta_next = BALL_VELOCITY_NEG;                       // move right
+        else begin
+            if(y_ball_t < 1)                                       // collide with top
+                y_delta_next = BALL_VELOCITY_POS;                       // move down
+            else if(y_ball_b > Y_MAX)                                   // collide with bottom
+                y_delta_next = BALL_VELOCITY_NEG;                       // move up
+            else if((X_PAD_L <= x_ball_r) && (x_ball_r <= X_PAD_R) &&
+                    (y_pad_t <= y_ball_b) && (y_ball_t <= y_pad_b))     // collide with paddle 1
+                x_delta_next = BALL_VELOCITY_POS;                       // move left
+            else if((X_PAD2_L <= x_ball_r) && (x_ball_r <= X_PAD2_R) &&
+                    (y_pad2_t <= y_ball_b) && (y_ball_t <= y_pad2_b))   // collide with paddle 2
+                x_delta_next = BALL_VELOCITY_NEG;                       // move right
+            else if(x_ball_r < 1) begin
+                p2_score <= 1'b1;
+                end
+            else if(x_ball_r > X_MAX) begin
+                p1_score <= 1'b1;
+                end
+        end
     end
         
     // rgb multiplexing circuit

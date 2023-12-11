@@ -23,7 +23,7 @@
 module main(
     input clk,             
 	input btnC,            // for reset
-	input btnU,
+	input btnU,            // for start
 	output Hsync, 
 	output Vsync,
 	output [3:0] vgaRed,    
@@ -35,8 +35,11 @@ module main(
     
     wire [11:0] rgb;
     wire an0, an1, an2, an3;
-    wire [1:0] reset;
-    wire [1:0] start;
+    wire reset;
+    wire start;
+    reg state;
+    reg [1:0] state_reg, state_next;
+    // reg [1:0] way;
     
 	assign rgb = {vgaRed, vgaGreen, vgaBlue};
 	assign an = {an3, an2, an1, an0};
@@ -54,20 +57,7 @@ module main(
 	
 	wire targetClk;
     wire [18:0] tclk;
-
-    vga_controller vga_c(.clk(clk), .reset(reset), .hsync(Hsync), .vsync(Vsync),
-                         .video_on(video_on), .p_tick(tick), .x(x), .y(y));
-                         
-    pong p(.clk(clk), .reset(reset), .start(start), .up(reset), 
-           .down(reset),  .video_on(video_on), .x(x), .y(y), 
-           .p1_score(p1_score), .p2_score(p2_score), .rgb(rgb_next));
-           
-    pongScore ps(.p1_score(p1_score), .p2_score(p2_score), .reset(reset), .quad(quad));
     
-    quad7seg q7s(.clk(targetClk), .quad(quad), .an0(an0), .an1(an1),
-                 .an2(an2), .an3(an3), .seg(seg));
-                 
-                 
     assign tclk[0] = clk;
     
     genvar c;
@@ -86,5 +76,45 @@ module main(
             rgb_reg <= rgb_next;
     
     assign rgb = rgb_reg;
-     
+    
+
+    vga_controller vga_c(.clk(clk), .reset(reset), .hsync(Hsync), .vsync(Vsync),
+                         .video_on(video_on), .p_tick(tick), .x(x), .y(y));
+                         
+    pong p(.clk(clk), .state(state), .reset(reset), .up(reset), 
+           .down(reset),  .video_on(video_on), .x(x), .y(y), 
+           .p1_score(p1_score), .p2_score(p2_score), .rgb(rgb_next));
+           
+    pongScore ps(.clk(clk), .p1_score(p1_score), .p2_score(p2_score), .reset(reset), .quad(quad));
+    
+    quad7seg q7s(.clk(targetClk), .quad(quad), .an0(an0), .an1(an1),
+                 .an2(an2), .an3(an3), .seg(seg));
+    
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            state_reg <= 1'b1;
+        end
+        else begin
+            state_reg <= state_next;
+        end
+    end
+    
+    always @* begin
+        state = 1'b1;
+        state_next = state_reg;
+        case(state_reg)
+            1'b0: begin
+                state = 1'b0;
+                if (p1_score | p2_score) begin
+                    state_next = 1'b1;
+                end
+            end
+            1'b1: begin
+                if (start) begin
+                    state_next = 1'b0;
+                end
+            end
+        endcase
+    end
+    
 endmodule

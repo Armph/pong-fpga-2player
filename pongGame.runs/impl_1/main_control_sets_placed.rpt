@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Mon Dec 11 12:52:40 2023
+| Date         : Mon Dec 11 22:17:35 2023
 | Host         : DESKTOP-SM4QN4U running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file main_control_sets_placed.rpt
 | Design       : main
@@ -23,7 +23,7 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Number of unique control sets                            |    27 |
+| Number of unique control sets                            |    26 |
 | Unused register locations in slices containing registers |   166 |
 +----------------------------------------------------------+-------+
 
@@ -34,13 +34,12 @@ Table of Contents
 +--------+--------------+
 | Fanout | Control Sets |
 +--------+--------------+
-|      1 |           19 |
+|      1 |           18 |
 |      2 |            1 |
-|      4 |            1 |
 |     10 |            2 |
 |     12 |            1 |
-|     15 |            1 |
-|    16+ |            2 |
+|     13 |            1 |
+|    16+ |            3 |
 +--------+--------------+
 
 
@@ -50,48 +49,47 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              35 |           25 |
-| No           | No                    | Yes                    |              38 |           19 |
-| No           | Yes                   | No                     |               1 |            1 |
-| Yes          | No                    | No                     |              12 |            5 |
-| Yes          | No                    | Yes                    |              10 |            3 |
-| Yes          | Yes                   | No                     |              18 |            6 |
+| No           | No                    | No                     |              33 |           26 |
+| No           | No                    | Yes                    |              35 |           20 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |              32 |           13 |
+| Yes          | No                    | Yes                    |              10 |            7 |
+| Yes          | Yes                   | No                     |              20 |            8 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+-------------------------------------+------------------------------------+-------------------------------------+------------------+----------------+
-|             Clock Signal            |            Enable Signal           |           Set/Reset Signal          | Slice Load Count | Bel Load Count |
-+-------------------------------------+------------------------------------+-------------------------------------+------------------+----------------+
-|  genblk1[10].fdiv/clkDiv_reg_0      |                                    |                                     |                1 |              1 |
-|  genblk1[2].fdiv/clkDiv_reg_0       |                                    |                                     |                1 |              1 |
-|  genblk1[0].fdiv/clkDiv_reg_0       |                                    |                                     |                1 |              1 |
-|  genblk1[3].fdiv/clkDiv_reg_0       |                                    |                                     |                1 |              1 |
-|  genblk1[4].fdiv/clkDiv_reg_0       |                                    |                                     |                1 |              1 |
-|  genblk1[6].fdiv/clkDiv_reg_0       |                                    |                                     |                1 |              1 |
-|  genblk1[11].fdiv/clkDiv_reg_0      |                                    |                                     |                1 |              1 |
-|  genblk1[9].fdiv/clkDiv_reg_0       |                                    |                                     |                1 |              1 |
-|  genblk1[8].fdiv/clkDiv_reg_0       |                                    |                                     |                1 |              1 |
-|  genblk1[5].fdiv/clkDiv_reg_0       |                                    |                                     |                1 |              1 |
-|  genblk1[12].fdiv/clkDiv_reg_0      |                                    |                                     |                1 |              1 |
-|  genblk1[7].fdiv/clkDiv_reg_0       |                                    |                                     |                1 |              1 |
-|  genblk1[1].fdiv/clkDiv_reg_0       |                                    |                                     |                1 |              1 |
-|  genblk1[16].fdiv/clkDiv_reg_0      |                                    |                                     |                1 |              1 |
-|  genblk1[17].fdiv/clkDiv_reg_0      |                                    |                                     |                1 |              1 |
-|  genblk1[14].fdiv/clkDiv_reg_0      |                                    |                                     |                1 |              1 |
-|  genblk1[13].fdiv/clkDiv_reg_0      |                                    |                                     |                1 |              1 |
-|  genblk1[15].fdiv/clkDiv_reg_0      |                                    |                                     |                1 |              1 |
-|  p/n_p2_reg[0]_i_1_n_0              |                                    | start_btn/pulser_inst/btn_out_reg_0 |                1 |              1 |
-|  fdivTarget/CLK                     |                                    |                                     |                1 |              2 |
-|  p/p2_score_reg_0                   |                                    | reset_btn/pulser_inst/AR[0]         |                1 |              4 |
-|  vga_c/clk_divider/r_25MHz_reg[1]_0 |                                    | reset_btn/pulser_inst/AR[0]         |                6 |             10 |
-|  vga_c/clk_divider/r_25MHz_reg[1]_0 | vga_c/v_count_next_1               | reset_btn/pulser_inst/AR[0]         |                3 |             10 |
-|  clk_IBUF_BUFG                      | vga_c/clk_divider/r_25MHz_reg[1]_0 |                                     |                5 |             12 |
-|  clk_IBUF_BUFG                      |                                    |                                     |                6 |             15 |
-|  clk_IBUF_BUFG                      | reset_btn/pulser_inst/E[0]         | p/y_ball_reg[9]_i_1_n_0             |                6 |             18 |
-|  clk_IBUF_BUFG                      |                                    | reset_btn/pulser_inst/AR[0]         |               12 |             24 |
-+-------------------------------------+------------------------------------+-------------------------------------+------------------+----------------+
++-------------------------------------+----------------------------------------+-----------------------------+------------------+----------------+
+|             Clock Signal            |              Enable Signal             |       Set/Reset Signal      | Slice Load Count | Bel Load Count |
++-------------------------------------+----------------------------------------+-----------------------------+------------------+----------------+
+|  genblk1[2].fdiv/clkDiv_reg_0       |                                        |                             |                1 |              1 |
+|  genblk1[3].fdiv/clkDiv_reg_0       |                                        |                             |                1 |              1 |
+|  genblk1[0].fdiv/clkDiv_reg_0       |                                        |                             |                1 |              1 |
+|  genblk1[4].fdiv/clkDiv_reg_0       |                                        |                             |                1 |              1 |
+|  genblk1[5].fdiv/clkDiv_reg_0       |                                        |                             |                1 |              1 |
+|  genblk1[10].fdiv/clkDiv_reg_0      |                                        |                             |                1 |              1 |
+|  genblk1[12].fdiv/clkDiv_reg_0      |                                        |                             |                1 |              1 |
+|  genblk1[6].fdiv/clkDiv_reg_0       |                                        |                             |                1 |              1 |
+|  genblk1[7].fdiv/clkDiv_reg_0       |                                        |                             |                1 |              1 |
+|  genblk1[11].fdiv/clkDiv_reg_0      |                                        |                             |                1 |              1 |
+|  genblk1[9].fdiv/clkDiv_reg_0       |                                        |                             |                1 |              1 |
+|  genblk1[8].fdiv/clkDiv_reg_0       |                                        |                             |                1 |              1 |
+|  genblk1[1].fdiv/clkDiv_reg_0       |                                        |                             |                1 |              1 |
+|  genblk1[16].fdiv/clkDiv_reg_0      |                                        |                             |                1 |              1 |
+|  genblk1[17].fdiv/clkDiv            |                                        |                             |                1 |              1 |
+|  genblk1[14].fdiv/clkDiv_reg_0      |                                        |                             |                1 |              1 |
+|  genblk1[13].fdiv/clkDiv_reg_0      |                                        |                             |                1 |              1 |
+|  genblk1[15].fdiv/clkDiv_reg_0      |                                        |                             |                1 |              1 |
+|  fdivTarget/CLK                     |                                        |                             |                1 |              2 |
+|  vga_c/clk_divider/r_25MHz_reg[1]_0 |                                        | reset_btn/pulser_inst/reset |                6 |             10 |
+|  vga_c/clk_divider/r_25MHz_reg[1]_0 | vga_c/v_count_next_0                   | reset_btn/pulser_inst/reset |                7 |             10 |
+|  clk_IBUF_BUFG                      | vga_c/clk_divider/r_25MHz_reg[1]_0     |                             |                5 |             12 |
+|  clk_IBUF_BUFG                      |                                        |                             |                7 |             13 |
+|  clk_IBUF_BUFG                      | vga_c/E[0]                             | p/y_ball_reg[9]_i_1_n_0     |                8 |             20 |
+|  clk_IBUF_BUFG                      | reset_btn/pulser_inst/btn_out_reg_0[0] |                             |                8 |             20 |
+|  clk_IBUF_BUFG                      |                                        | reset_btn/pulser_inst/reset |               14 |             25 |
++-------------------------------------+----------------------------------------+-----------------------------+------------------+----------------+
 
 
