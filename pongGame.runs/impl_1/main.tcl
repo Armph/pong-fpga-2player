@@ -70,12 +70,12 @@ set rc [catch {
   set_property board_part digilentinc.com:basys3:part0:1.1 [current_project]
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
-  set_property webtalk.parent_dir C:/Users/iHC/Desktop/pongGame/pongGame.cache/wt [current_project]
-  set_property parent.project_path C:/Users/iHC/Desktop/pongGame/pongGame.xpr [current_project]
+  set_property webtalk.parent_dir C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.cache/wt [current_project]
+  set_property parent.project_path C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.xpr [current_project]
   set_property ip_output_repo C:/Users/iHC/Desktop/pongGame/pongGame.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
-  add_files -quiet C:/Users/iHC/Desktop/pongGame/pongGame.runs/synth_1/main.dcp
-  read_xdc C:/Users/iHC/Desktop/pongGame/pongGame.srcs/constrs_1/new/Basys-3-Master.xdc
+  add_files -quiet C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.runs/synth_1/main.dcp
+  read_xdc C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.srcs/constrs_1/new/Basys-3-Master.xdc
   link_design -top main -part xc7a35tcpg236-1
   close_msg_db -file init_design.pb
 } RESULT]

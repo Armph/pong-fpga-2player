@@ -22,24 +22,26 @@
 
 module quad7seg(
     input clk,
-    input [12:0] quad,
+    input [3:0] num0, num1, num2, num3,
     output an0,
     output an1,
     output an2,
     output an3,
-    output [6:0] seg
+    output [6:0] seg_out
     );
     
     reg [1:0] ns;
     reg [1:0] ps;
     reg [3:0] dispEn;
     
-    reg [3:0] hex;
+    reg [3:0] hexIn;
+    wire [6:0] segment;
     
-    hexTo7seg h27s(.hex(hex), .seg(seg));
+    assign seg_out = segment;
+    
+    hexTo7seg h27s(hexIn, segment);
     
     assign {an3, an2, an1, an0} = ~dispEn;
-    assign {num0, num1, num2, num3} = quad;
     
     always @(posedge clk)
     begin
@@ -64,10 +66,10 @@ module quad7seg(
     always @(ps)
     begin
         case(ps)
-            2'b00: hex = num3;
-            2'b01: hex = num2;
-            2'b10: hex = num1;
-            2'b11: hex = num0;      
+            2'b00: hexIn = num0;
+            2'b01: hexIn = num1;
+            2'b10: hexIn = num2;
+            2'b11: hexIn = num3;      
         endcase
     end 
     

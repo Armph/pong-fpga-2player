@@ -1,55 +1,65 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 12/10/2023 10:26:13 AM
-// Design Name: 
-// Module Name: pongScore
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module pongScore(
     input clk,
-    input p1_score,
-    input p2_score,
     input reset,
-    output wire [12:0] quad
+    input p1_inc, p2_inc,
+    output [3:0] num0, num1, num2, num3
     );
     
-    reg [3:0] p1_dig0, p1_dig1, p2_dig0, p2_dig1;
     
-    assign quad = {p1_dig1, p1_dig0, p2_dig1, p2_dig0};
+    reg [3:0] r_p1_dig0, r_p1_dig1, p1_dig0_next, p1_dig1_next;
+    reg [3:0] r_p2_dig0, r_p2_dig1, p2_dig0_next, p2_dig1_next;
     
+    // register control
+    always @(posedge clk or posedge reset)
+        if(reset) begin
+            r_p1_dig1 <= 0;
+            r_p1_dig0 <= 0;
+            r_p2_dig1 <= 0;
+            r_p2_dig0 <= 0;
+        end
+        else begin
+            r_p1_dig1 <= p1_dig1_next;
+            r_p1_dig0 <= p1_dig0_next;
+            r_p2_dig1 <= p2_dig1_next;
+            r_p2_dig0 <= p2_dig0_next;
+        end
+    
+    // next state logic
     always @* begin
-        if (p1_score) begin
-            if (p1_dig0 === 4'b1001) p1_dig1 = (p1_dig1+1)%10;
-            p1_dig0 = p1_dig0+1;
-        end
-        else if (p2_score) begin
-            if (p2_dig0 === 4'b1001) p2_dig1 = (p2_dig1+1)%10;
-            p2_dig0 = (p2_dig0+1);
-        end
+        p1_dig0_next = r_p1_dig0;
+        p1_dig1_next = r_p1_dig1;
+        p2_dig0_next = r_p2_dig0;
+        p2_dig1_next = r_p2_dig1;
+        
+        if (p1_inc) begin
+            if(r_p1_dig0 == 9) begin
+                p1_dig0_next = 0;
+                if(r_p1_dig1 == 9)
+                    p1_dig1_next = 0;
+                else
+                    p1_dig1_next = r_p1_dig1 + 1;
+            end
+            else
+                p1_dig0_next = r_p1_dig0 + 1;
+         end
+         else if (p2_inc) begin
+            if(r_p2_dig0 == 9) begin
+                p2_dig0_next = 0;
+                if(r_p2_dig1 == 9)
+                    p2_dig1_next = 0;
+                else
+                    p2_dig1_next = r_p2_dig1 + 1;
+            end
+            else
+                p2_dig0_next = r_p2_dig0 + 1;
+         end
     end
     
-    always @(posedge clk) begin
-        if (reset) begin
-            p1_dig0 <= 4'b0000;
-            p1_dig1 <= 4'b0000;
-            p2_dig0 <= 4'b0000;
-            p2_dig1 <= 4'b0000;
-        end
-    end
+    assign num0 = r_p1_dig0;
+    assign num1 = r_p1_dig1;
+    assign num2 = r_p2_dig0;
+    assign num3 = r_p2_dig1;
     
 endmodule

@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/iHC/Desktop/pongGame/pongGame.runs/impl_1'
+HD_PWD='C:/Users/iHC/Desktop/2110361HWSYNLAB/pongGame.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
