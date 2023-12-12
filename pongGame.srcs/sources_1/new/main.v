@@ -83,7 +83,6 @@ module main(
         .num2(num2),
         .num3(num3));
     
-    /*
     pongTxt(
         .clk(clk),
         .x(w_x),
@@ -94,7 +93,6 @@ module main(
         .num3(num3),
         .text_on(text_on),
         .text_rgb(text_rgb));
-        */
     
     wire targetClk;
     wire [18:0] tclk;
@@ -144,7 +142,7 @@ module main(
         
         case(state_reg)
             newball: begin
-                if(start | start2) state_next = play;
+                if(start | newB) state_next = play;
             end
             
             play: begin
@@ -164,14 +162,13 @@ module main(
     end
     
     always @*
-        if(~w_vid_on) rgb_next = 12'h000; // blank
+        if(~w_vid_on) rgb_next = 12'h000;
         else
             //if (graph_on)
-                rgb_next = graph_rgb;
-                /*
-            else if (text_on)
+            if (text_on)
                 rgb_next = text_rgb;
-                */
+            else
+                rgb_next = graph_rgb;
     
     assign rgb = rgb_reg;
     

@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Tue Dec 12 06:16:39 2023
+| Date         : Tue Dec 12 07:10:47 2023
 | Host         : DESKTOP-SM4QN4U running 64-bit major release  (build 9200)
 | Command      : report_methodology -file main_methodology_drc_routed.rpt -pb main_methodology_drc_routed.pb -rpx main_methodology_drc_routed.rpx
 | Design       : main
@@ -23,12 +23,13 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 118
+             Violations found: 130
 +-----------+----------+-------------------------------+------------+
 | Rule      | Severity | Description                   | Violations |
 +-----------+----------+-------------------------------+------------+
 | TIMING-17 | Warning  | Non-clocked sequential cell   | 95         |
 | TIMING-18 | Warning  | Missing input or output delay | 23         |
+| TIMING-20 | Warning  | Non-clocked latch             | 12         |
 +-----------+----------+-------------------------------+------------+
 
 2. REPORT DETAILS
@@ -125,12 +126,12 @@ Related violations: <none>
 
 TIMING-17#19 Warning
 Non-clocked sequential cell  
-The clock pin nolabel_line114/ps_reg[0]/C is not reached by a timing clock
+The clock pin nolabel_line112/ps_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#20 Warning
 Non-clocked sequential cell  
-The clock pin nolabel_line114/ps_reg[1]/C is not reached by a timing clock
+The clock pin nolabel_line112/ps_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#21 Warning
@@ -621,6 +622,66 @@ Related violations: <none>
 TIMING-18#23 Warning
 Missing input or output delay  
 An output delay is missing on vgaRed[3] relative to clock(s) sys_clk_pin
+Related violations: <none>
+
+TIMING-20#1 Warning
+Non-clocked latch  
+The latch nolabel_line86/bit_addr_reg[0] cannot be properly analyzed as its control pin nolabel_line86/bit_addr_reg[0]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#2 Warning
+Non-clocked latch  
+The latch nolabel_line86/bit_addr_reg[1] cannot be properly analyzed as its control pin nolabel_line86/bit_addr_reg[1]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#3 Warning
+Non-clocked latch  
+The latch nolabel_line86/bit_addr_reg[2] cannot be properly analyzed as its control pin nolabel_line86/bit_addr_reg[2]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#4 Warning
+Non-clocked latch  
+The latch nolabel_line86/char_addr_reg[0] cannot be properly analyzed as its control pin nolabel_line86/char_addr_reg[0]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#5 Warning
+Non-clocked latch  
+The latch nolabel_line86/char_addr_reg[1] cannot be properly analyzed as its control pin nolabel_line86/char_addr_reg[1]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#6 Warning
+Non-clocked latch  
+The latch nolabel_line86/char_addr_reg[2] cannot be properly analyzed as its control pin nolabel_line86/char_addr_reg[2]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#7 Warning
+Non-clocked latch  
+The latch nolabel_line86/char_addr_reg[3] cannot be properly analyzed as its control pin nolabel_line86/char_addr_reg[3]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#8 Warning
+Non-clocked latch  
+The latch nolabel_line86/char_addr_reg[5] cannot be properly analyzed as its control pin nolabel_line86/char_addr_reg[5]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#9 Warning
+Non-clocked latch  
+The latch nolabel_line86/row_addr_reg[0] cannot be properly analyzed as its control pin nolabel_line86/row_addr_reg[0]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#10 Warning
+Non-clocked latch  
+The latch nolabel_line86/row_addr_reg[1] cannot be properly analyzed as its control pin nolabel_line86/row_addr_reg[1]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#11 Warning
+Non-clocked latch  
+The latch nolabel_line86/row_addr_reg[2] cannot be properly analyzed as its control pin nolabel_line86/row_addr_reg[2]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#12 Warning
+Non-clocked latch  
+The latch nolabel_line86/row_addr_reg[3] cannot be properly analyzed as its control pin nolabel_line86/row_addr_reg[3]/G is not reached by a timing clock
 Related violations: <none>
 
 

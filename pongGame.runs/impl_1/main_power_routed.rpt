@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Tue Dec 12 06:16:40 2023
+| Date             : Tue Dec 12 07:10:47 2023
 | Host             : DESKTOP-SM4QN4U running 64-bit major release  (build 9200)
 | Command          : report_power -file main_power_routed.rpt -pb main_power_summary_routed.pb -rpx main_power_routed.rpx
 | Design           : main
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.109        |
+| Total On-Chip Power (W)  | 0.110        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.037        |
+| Dynamic (W)              | 0.039        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
-| Max Ambient (C)          | 84.5         |
-| Junction Temperature (C) | 25.5         |
+| Max Ambient (C)          | 84.4         |
+| Junction Temperature (C) | 25.6         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -49,22 +49,22 @@ Table of Contents
 1.1 On-Chip Components
 ----------------------
 
-+-------------------------+-----------+----------+-----------+-----------------+
-| On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
-+-------------------------+-----------+----------+-----------+-----------------+
-| Clocks                  |     0.002 |        3 |       --- |             --- |
-| Slice Logic             |     0.002 |      801 |       --- |             --- |
-|   LUT as Logic          |     0.002 |      316 |     20800 |            1.52 |
-|   CARRY4                |    <0.001 |       52 |      8150 |            0.64 |
-|   Register              |    <0.001 |      239 |     41600 |            0.57 |
-|   Others                |     0.000 |       64 |       --- |             --- |
-|   BUFG                  |     0.000 |        1 |        32 |            3.13 |
-|   LUT as Shift Register |     0.000 |        1 |      9600 |            0.01 |
-| Signals                 |     0.002 |      511 |       --- |             --- |
-| I/O                     |     0.031 |       30 |       106 |           28.30 |
-| Static Power            |     0.072 |          |           |                 |
-| Total                   |     0.109 |          |           |                 |
-+-------------------------+-----------+----------+-----------+-----------------+
++----------------+-----------+----------+-----------+-----------------+
+| On-Chip        | Power (W) | Used     | Available | Utilization (%) |
++----------------+-----------+----------+-----------+-----------------+
+| Clocks         |     0.002 |        3 |       --- |             --- |
+| Slice Logic    |     0.002 |      826 |       --- |             --- |
+|   LUT as Logic |     0.002 |      340 |     20800 |            1.63 |
+|   CARRY4       |    <0.001 |       52 |      8150 |            0.64 |
+|   Register     |    <0.001 |      248 |     41600 |            0.60 |
+|   Others       |     0.000 |       64 |       --- |             --- |
+|   BUFG         |     0.000 |        1 |        32 |            3.13 |
+| Signals        |     0.003 |      553 |       --- |             --- |
+| Block RAM      |    <0.001 |      0.5 |        50 |            1.00 |
+| I/O            |     0.031 |       30 |       106 |           28.30 |
+| Static Power   |     0.072 |          |           |                 |
+| Total          |     0.110 |          |           |                 |
++----------------+-----------+----------+-----------+-----------------+
 
 
 1.2 Power Supply Summary
@@ -73,7 +73,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.016 |       0.006 |      0.010 |
+| Vccint    |       1.000 |     0.018 |       0.008 |      0.010 |
 | Vccaux    |       1.800 |     0.014 |       0.001 |      0.013 |
 | Vcco33    |       3.300 |     0.010 |       0.009 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -142,9 +142,9 @@ Table of Contents
 +------------------+-----------+
 | Name             | Power (W) |
 +------------------+-----------+
-| main             |     0.037 |
-|   nolabel_line62 |     0.002 |
-|   vga_unit       |     0.001 |
+| main             |     0.039 |
+|   nolabel_line62 |     0.003 |
+|   vga_unit       |     0.002 |
 +------------------+-----------+
 
 
